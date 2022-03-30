@@ -52,19 +52,6 @@ namespace PROJET_FINAL__WEB.Models
             Telephone = telephone;
         }
 
-        /// <summary>
-        /// Constructeur avec le modèle Garderie en paramètre.
-        /// </summary>
-        /// <param name="laGarderie">L'objet du modèle Garderie.</param>
-        public GarderieDTO(GarderieDTO laGarderie)
-        {
-            Nom = laGarderie.Nom;
-            Adresse = laGarderie.Adresse;
-            Ville = laGarderie.Ville;
-            Province = laGarderie.Province;
-            Telephone = laGarderie.Telephone;
-        }
-
         #endregion Constructeurs
     }
 }

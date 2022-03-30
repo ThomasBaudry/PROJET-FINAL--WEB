@@ -10,7 +10,7 @@ else
 {
     @*Affichage de la liste des cégeps...*@
     <br />
-    <h3>Liste des garderie(s) (@ViewBag.ListeGarderies.Length Cégep(s)) :</h3>
+    <h3>Liste des garderie(s) (@ViewBag.ListeGarderies.Length Garderie(s)) :</h3>
     <br />
     <form asp-controller="" asp-action="" method="post">
         <table>
@@ -19,36 +19,32 @@ else
                 <th>Adresse</th>
                 <th>Ville</th>
                 <th>Province</th>
-                <th>Code Postal</th>
                 <th>Téléphone</th>
-                <th>Courriel</th>
-                @if(ViewBag.ListeCegeps.Length > 0)
+                @if(ViewBag.ListeGarderies.Length > 0)
                 {
-                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Cegep/ViderListeCegep'; this.form.method='post'; submit();}" type="button" /></th>
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Garderie/ViderListeGarderie'; this.form.method='post'; submit();}" type="button" /></th>
                 }
             </tr>
-            @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
+            @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
             {
                 <tr>
-                    <td>@cegep.Nom</td>
-                    <td>@cegep.Adresse</td>
-                    <td>@cegep.Ville</td>
-                    <td>@cegep.Province</td>
-                    <td>@cegep.CodePostal</td>
-                    <td>@cegep.Telephone</td>
-                    <td>@cegep.Courriel</td>
-                    <td><input value="Modifier" onclick="document.getElementById('nomCegep').value ='@cegep.Nom'; this.form.action='/Cegep/FormulaireModifierCegep'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('nomCegep').value ='@cegep.Nom';if(confirm('Voulez-vous vraiment supprimer le Cégep?')==true){this.form.action='/Cegep/SupprimerCegep'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td>@garderie.Nom</td>
+                    <td>@garderie.Adresse</td>
+                    <td>@garderie.Ville</td>
+                    <td>@garderie.Province</td>
+                    <td>@garderie.Telephone</td>
+                    <td><input value="Modifier" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireModifierGarderie'; this.form.method='get'; submit();" type="button" /></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom';if(confirm('Voulez-vous vraiment supprimer la Garderie?')==true){this.form.action='/Garderie/SupprimerGarderie'; this.form.method='post'; submit();}" type="button" /></td>
                 </tr>
             }
         </table>
-        <input id="nomCegep" name="nomCegep" type="hidden"/>
+        <input id="nomGarderie" name="nomGarderie" type="hidden"/>
     </form>
     <br />
-    <b>Ajouter un cégep : </b>
+    <b>Ajouter une Garderie : </b>
     <br />
     <br />
-    <form asp-controller="Cegep" asp-action="AjouterCegep" method="post">
+    <form asp-controller="Garderie" asp-action="AjouterGarderie" method="post">
         <table>
             <tr>
                 <td>
@@ -84,26 +80,10 @@ else
             </tr>
             <tr>
                 <td>
-                    <label asp-for="CodePostal"></label>
-                </td>
-                <td>
-                    <input asp-for="CodePostal" />
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <label asp-for="Telephone"></label>
                 </td>
                 <td>
                     <input asp-for="Telephone" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Courriel"></label>
-                </td>
-                <td>
-                    <input asp-for="Courriel" />
                 </td>
             </tr>
         </table>
