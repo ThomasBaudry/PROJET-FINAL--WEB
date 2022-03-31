@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using GestionCegepWeb.Utils;
-using PROJET_FINAL___API.Logics.DTOs;
+using PROJET_FINAL__WEB.Models;
 using System;
 
 namespace PROJET_FINAL__WEB.Controllers
@@ -21,7 +21,7 @@ namespace PROJET_FINAL__WEB.Controllers
             {
                 //Préparation des données pour la vue...
                 JsonValue jsonResponse = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie");
-                ViewBag.ListeGarderie = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponse.ToString()).ToArray();
+                ViewBag.ListeGarderies = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponse.ToString()).ToArray();
             }
             catch (Exception e)
             {

@@ -12,7 +12,7 @@ namespace PROJET_FINAL__WEB
     public class Program
     {
         public static string HOST = "localhost";
-        public static string PORT = "18724";
+        public static string PORT = "46846";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
