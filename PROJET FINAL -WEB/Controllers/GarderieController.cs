@@ -7,10 +7,23 @@ using GestionCegepWeb.Utils;
 using PROJET_FINAL__WEB.Models;
 using System;
 
+/// <summary>
+/// Namespace pour les controleurs de vue.
+/// </summary>
 namespace PROJET_FINAL__WEB.Controllers
 {
+    /// <summary>
+    /// Classe représentant le controleur de vue des Garderies.
+    /// </summary>
     public class GarderieController : Controller
     {
+        /// <summary>
+        /// Méthode de service appelé lors de l'action Index.
+        /// Rôles de l'action : 
+        ///   -Afficher la liste des Garderies.
+        ///   -Afficher le formulaire pour l'ajout d'une Garderie.
+        /// </summary>
+        /// <returns>ActionResult suite aux traitements des données.</returns>
         [Route("")]
         [Route("Garderie")]
         [Route("Garderie/Index")]
@@ -30,6 +43,13 @@ namespace PROJET_FINAL__WEB.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Méthode de service appelé lors de l'action AjouterGarderie.
+        /// Rôles de l'action : 
+        ///   -Ajouter une Garderie.
+        /// </summary>
+        /// <param name="garderieDTO">Le DTO de la Garderie.</param>
+        /// <returns>IActionResult</returns>
         [Route("/Garderie/AjouterCegep")]
         [HttpPost]
         public async Task<IActionResult> AjouterGarderie([FromForm] GarderieDTO garderieDTO)
@@ -47,6 +67,12 @@ namespace PROJET_FINAL__WEB.Controllers
             return RedirectToAction("Index", "Garderie");
         }
 
+        /// <summary>
+        /// Action FormulaireModifierGarderie.
+        /// Permet d'afficher le formulaire pour la modification d'une Garderie.
+        /// </summary>
+        /// <param name="nomGarderie">Nom de la Garderie.</param>
+        /// <returns>IActionResult</returns>
         [Route("/Garderie/FormulaireModifierGarderie")]
         [HttpGet]
         public async Task<IActionResult> FormulaireModifierGarderie([FromQuery] string nomGarderie)
@@ -66,6 +92,12 @@ namespace PROJET_FINAL__WEB.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Action ModifierGarderie.
+        /// Permet de modifier une Garderie.
+        /// </summary>
+        /// <param name="garderieDTO">La Garderie a modifier.</param>
+        /// <returns>ActionResult</returns>
         [Route("/Garderie/ModifierGarderie")]
         [HttpPost]
         public async Task<IActionResult> ModifierGarderie([FromForm] GarderieDTO garderieDTO)
@@ -82,6 +114,13 @@ namespace PROJET_FINAL__WEB.Controllers
             //Lancement de l'action Index...
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Action SupprimerGarderie.
+        /// Permet de supprimer une Garderie.
+        /// </summary>
+        /// <param name="nomGarderie">Le nom de la Garderie.</param>
+        /// <returns>ActionResult</returns>
         [Route("/Garderie/SupprimerGarderie")]
         [HttpPost]
         public async Task<IActionResult> SupprimerGarderie([FromForm] string nomGarderie)
@@ -98,6 +137,11 @@ namespace PROJET_FINAL__WEB.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Action ViderListeGarderie.
+        /// Permet de vider la liste des Garderies.
+        /// </summary>
+        /// <returns>ActionResult</returns>
         [Route("/Garderie/ViderListeGarderie")]
         [HttpPost]
         public async Task<IActionResult> ViderListeGarderie()
