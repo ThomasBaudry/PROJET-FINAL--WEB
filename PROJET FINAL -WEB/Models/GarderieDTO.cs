@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PROJET_FINAL___API.Logics.DTOs
+namespace PROJET_FINAL__WEB.Models
 {
     public class GarderieDTO
     {
@@ -50,19 +50,6 @@ namespace PROJET_FINAL___API.Logics.DTOs
             Ville = ville;
             Province = province;
             Telephone = telephone;
-        }
-
-        /// <summary>
-        /// Constructeur avec le modèle Garderie en paramètre.
-        /// </summary>
-        /// <param name="laGarderie">L'objet du modèle Garderie.</param>
-        public GarderieDTO(GarderieDTO laGarderie)
-        {
-            Nom = laGarderie.Nom;
-            Adresse = laGarderie.Adresse;
-            Ville = laGarderie.Ville;
-            Province = laGarderie.Province;
-            Telephone = laGarderie.Telephone;
         }
 
         #endregion Constructeurs
