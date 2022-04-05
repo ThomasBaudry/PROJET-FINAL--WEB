@@ -15,7 +15,7 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Propriété représentant le pourcentage de la Catégorie de Dépense.
         /// </summary>
-        public string Pourcentage { get; set; }
+        public double Pourcentage { get; set; }
 
         #endregion Proprietes
 
@@ -28,7 +28,7 @@ namespace PROJET_FINAL__WEB.Models
         /// </summary>
         /// <param name="description">Nom de la Catégorie de Dépense.</param>
         /// <param name="pourcentage">Pourcentage de la Catégorie de Dépense.</param>
-        public CategorieDepenseDTO(string description = "", string pourcentage = "")
+        public CategorieDepenseDTO(string description = "", double pourcentage = 0)
         {
             Description = description;
             Pourcentage = pourcentage;

@@ -15,11 +15,11 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Propriété représentant le montant de la Dépense.
         /// </summary>
-        public string Montant { get; set; }
+        public double Montant { get; set; }
         /// <summary>
         /// Propriété représentant le montant admissible de la Dépense (= montant * categorie depense).
         /// </summary>
-        public string MontantAdmissible { get; set; }
+        public double MontantAdmissible { get; set; }
         /// <summary>
         /// Propriété reliant avec le Commerce.
         /// </summary>
@@ -41,7 +41,7 @@ namespace PROJET_FINAL__WEB.Models
         /// <param name="dateTemps">Date du moment de la Dépense.</param>
         /// <param name="montant">Montant de la Dépense.</param>
         /// <param name="montantAdmissible">Montant admissible de la Dépense.</param>
-        public DepenseDTO(string dateTemps = "", string montant = "", string montantAdmissible = "")
+        public DepenseDTO(string dateTemps = "", double montant = 0, double montantAdmissible = 0)
         {
             DateTemps = dateTemps;
             Montant = montant;
