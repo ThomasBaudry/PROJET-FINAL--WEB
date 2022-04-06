@@ -23,11 +23,11 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Propriété reliant avec le Commerce.
         /// </summary>
-        public CommerceDTO commerceDTO { get; set; }
+        public CommerceDTO CommerceDTO { get; set; }
         /// <summary>
         /// Propriété reliant avec la Catégorie de Dépenses).
         /// </summary>
-        public CategorieDepenseDTO categorieDepenseDTO { get; set; }
+        public CategorieDepenseDTO CategorieDepenseDTO { get; set; }
 
         #endregion Proprietes
 
@@ -41,11 +41,13 @@ namespace PROJET_FINAL__WEB.Models
         /// <param name="dateTemps">Date du moment de la Dépense.</param>
         /// <param name="montant">Montant de la Dépense.</param>
         /// <param name="montantAdmissible">Montant admissible de la Dépense.</param>
-        public DepenseDTO(string dateTemps = "", double montant = 0, double montantAdmissible = 0)
+        public DepenseDTO(string dateTemps = "", double montant = 0, double montantAdmissible = 0, CommerceDTO commerceDTO = null, CategorieDepenseDTO categorieDTO= null)
         {
             DateTemps = dateTemps;
             Montant = montant;
             MontantAdmissible = montantAdmissible;
+            CommerceDTO = commerceDTO;
+            CategorieDepenseDTO = categorieDTO;
         }
 
         #endregion Constructeurs

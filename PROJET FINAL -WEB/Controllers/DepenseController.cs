@@ -24,9 +24,9 @@ namespace PROJET_FINAL__WEB.Controllers
         ///   -Afficher le formulaire pour l'ajout d'une Dépense.
         /// </summary>
         /// <returns>ActionResult suite aux traitements des données.</returns>
-        [Route("Dépenses")]
-        [Route("Dépense/Index")]
-        [Route("Dépense/ObtenirListeDépense")]
+        [Route("Depenses")]
+        [Route("Depense/Index")]
+        [Route("Depense/ObtenirListeDepense")]
         [HttpGet]
         public async Task<IActionResult> Index(string nomGarderie)
         {
@@ -46,7 +46,7 @@ namespace PROJET_FINAL__WEB.Controllers
                     }
 
                     //Préparation des données pour la vue...
-                    @ViewBag.NomGarderie = nomGarderie;
+                    ViewBag.NomGarderie = nomGarderie;
 
                     JsonValue jsonResponseGarderie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                     ViewBag.ListeGarderies = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderie.ToString()).ToArray();
