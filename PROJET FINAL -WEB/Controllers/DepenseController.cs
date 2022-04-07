@@ -28,7 +28,7 @@ namespace PROJET_FINAL__WEB.Controllers
         [Route("Depense/Index")]
         [Route("Depense/ObtenirListeDepense")]
         [HttpGet]
-        public async Task<IActionResult> Index(string nomGarderie)
+        public async Task<IActionResult> Index(string nomGarderie, string descCommerce, string descCategorieDepense)
         {
             //Mettre le if et son contenu en commentaire avant de lancer les tests fonctionnels...
             //**Le contenu du ELSE doit toutefois rester actif...**//
@@ -44,15 +44,33 @@ namespace PROJET_FINAL__WEB.Controllers
                         JsonValue jsonResponseGarderieNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                         nomGarderie = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderieNom.ToString()).ToArray()[0].Nom;
                     }
+                    if (descCommerce == null)
+                    {
+                        JsonValue jsonResponseCommerceDescription = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Commerce/ObtenirListeCommerce");
+                        descCommerce = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponseCommerceDescription.ToString()).ToArray()[0].Description;
+                    }
+                    if (descCategorieDepense == null)
+                    {
+                        JsonValue jsonResponseCategorieDepenseDesc = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ObtenirListeCategorieDepense");
+                        descCategorieDepense = JsonConvert.DeserializeObject<List<CategorieDepenseDTO>>(jsonResponseCategorieDepenseDesc.ToString()).ToArray()[0].Description;
+                    }
 
                     //Préparation des données pour la vue...
                     ViewBag.NomGarderie = nomGarderie;
+                    ViewBag.DescCommerce = descCommerce;
+                    ViewBag.DescCategorieDepense = descCategorieDepense;
 
                     JsonValue jsonResponseGarderie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                     ViewBag.ListeGarderies = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderie.ToString()).ToArray();
 
                     JsonValue jsonResponseDepense = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/ObtenirListeDepense?nomGarderie=" + nomGarderie);
                     ViewBag.ListeDepenses = JsonConvert.DeserializeObject<List<DepenseDTO>>(jsonResponseDepense.ToString()).ToArray();
+
+                    JsonValue jsonResponseCommerce = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Commerce/ObtenirListeCommerce");
+                    ViewBag.ListeCommerces = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponseCommerce.ToString()).ToArray();
+
+                    JsonValue jsonResponseCategorieDepense = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ObtenirListeCategorieDepense");
+                    ViewBag.ListeCategorieDepense = JsonConvert.DeserializeObject<List<CategorieDepenseDTO>>(jsonResponseCategorieDepense.ToString()).ToArray();
                 }
                 catch (Exception e)
                 {
@@ -78,7 +96,7 @@ namespace PROJET_FINAL__WEB.Controllers
         {
             try
             {
-                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/AjouterDepense?nomGarderie=" + nomGarderie, depenseDTO);
+                 await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/AjouterDepense?nomGarderie=" + nomGarderie, depenseDTO);
             }
             catch (Exception e)
             {

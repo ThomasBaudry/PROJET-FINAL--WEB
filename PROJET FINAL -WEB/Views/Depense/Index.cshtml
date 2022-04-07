@@ -65,7 +65,6 @@ else
                 <br>
                 <form asp-controller="Depense" asp-action="AjouterDepense" method="post">
                     <input type="hidden" name="nomGarderie" value="@ViewBag.NomGarderie">
-                    <input type="hidden" name="dateTemps" value="@ViewBag.DateTemps">
                     <table>
                         <tbody>
                             <tr>
@@ -86,10 +85,40 @@ else
                             </tr>
                             <tr>
                                 <td>
-                                    <label asp-for="MontantAdmissible"></label>
+                                    <label asp-for="CommerceDTO"></label>
                                 </td>
                                 <td>
-                                    <input asp-for="MontantAdmissible">
+                                    <select asp-for="CommerceDTO.Description">
+                                        @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+                                        {
+                                            if (commerce.Description == ViewBag.DescCommerce)
+                                            {
+                                                <option selected>@commerce.Description</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@commerce.Description</option>}
+                                            }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="CategorieDepenseDTO"></label>
+                                </td>
+                                <td>
+                                    <select asp-for="CategorieDepenseDTO.Description">
+                                        @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
+                                        {
+                                            if (categorie.Description == ViewBag.DescCategorieDepense)
+                                            {
+                                                <option selected>@categorie.Description</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@categorie.Description</option>}
+                                            }
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
