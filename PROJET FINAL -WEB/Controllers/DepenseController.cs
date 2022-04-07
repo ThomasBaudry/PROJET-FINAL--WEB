@@ -24,7 +24,7 @@ namespace PROJET_FINAL__WEB.Controllers
         ///   -Afficher le formulaire pour l'ajout d'une Dépense.
         /// </summary>
         /// <returns>ActionResult suite aux traitements des données.</returns>
-        [Route("Depenses")]
+        [Route("Depense")]
         [Route("Depense/Index")]
         [Route("Depense/ObtenirListeDepense")]
         [HttpGet]
