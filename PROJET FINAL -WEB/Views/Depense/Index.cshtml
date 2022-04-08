@@ -44,7 +44,7 @@ else
                                 <tr>
                                     <td>@depense.DateTemps</td>
                                     <td>@depense.Montant</td>
-                                    <td>@depense.MontantAdmissible</td>
+                                    <td>@depense.MontantAdmissible.ToString("0.00$")</td>
                                     <td><input value="Modifier" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button"></td>
                                     <td><input value="Supprimer" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button"></td>
                                 </tr>
@@ -69,10 +69,7 @@ else
                         <tbody>
                             <tr>
                                 <td>
-                                    <label asp-for="DateTemps"></label>
-                                </td>
-                                <td>
-                                    <input type="datetime-local" asp-for="DateTemps">
+                                    <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
                                 </td>
                             </tr>
                             <tr>
