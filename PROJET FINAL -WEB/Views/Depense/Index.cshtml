@@ -85,10 +85,10 @@ else
                             </tr>
                             <tr>
                                 <td>
-                                    <label asp-for="CommerceDTO"></label>
+                                    <label asp-for="Commerce"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="CommerceDTO.Description">
+                                    <select asp-for="Commerce.Description">
                                         @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
                                         {
                                             if (commerce.Description == ViewBag.DescCommerce)
@@ -104,10 +104,10 @@ else
                             </tr>
                             <tr>
                                 <td>
-                                    <label asp-for="CategorieDepenseDTO"></label>
+                                    <label asp-for="Categorie"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="CategorieDepenseDTO.Description">
+                                    <select asp-for="Categorie.Description">
                                         @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
                                         {
                                             if (categorie.Description == ViewBag.DescCategorieDepense)

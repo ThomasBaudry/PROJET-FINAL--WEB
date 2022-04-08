@@ -23,11 +23,11 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Propriété reliant avec le Commerce.
         /// </summary>
-        public CommerceDTO CommerceDTO { get; set; }
+        public CommerceDTO Commerce { get; set; }
         /// <summary>
         /// Propriété reliant avec la Catégorie de Dépenses).
         /// </summary>
-        public CategorieDepenseDTO CategorieDepenseDTO { get; set; }
+        public CategorieDepenseDTO Categorie { get; set; }
 
         #endregion Proprietes
 
@@ -46,8 +46,8 @@ namespace PROJET_FINAL__WEB.Models
             DateTemps = dateTemps;
             Montant = montant;
             MontantAdmissible = montantAdmissible;
-            CommerceDTO = commerceDTO;
-            CategorieDepenseDTO = categorieDTO;
+            Commerce = commerceDTO;
+            Categorie = categorieDTO;
         }
 
         #endregion Constructeurs
