@@ -1,0 +1,73 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model CommerceDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    @*Affichage de la liste des Commerce...*@
+    <br />
+    <h3>Liste des commerce(s) (@ViewBag.ListeCommerces.Length Commerce(s)) :</h3>
+    <br />
+    <form asp-controller="" asp-action="" method="post">
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Adresse</th>
+                <th>Téléphone</th>
+                @if(ViewBag.ListeCommerces.Length > 0)
+                {
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Commerce/ViderListeCommerce'; this.form.method='post'; submit();}" type="button" /></th>
+                }
+            </tr>
+            @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+            {
+                <tr>
+                    <td>@commerce.Description</td>
+                    <td>@commerce.Adresse</td>
+                    <td>@commerce.Telephone</td>
+                    <td><input value="Modifier" onclick="document.getElementById('descCommerce').value ='@commerce.Description'; this.form.action='/Commerce/FormulaireModifierCommerce'; this.form.method='get'; submit();" type="button" /></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('descCommerce').value ='@commerce.Description';if(confirm('Voulez-vous vraiment supprimer le Commerce?')==true){this.form.action='/Commmerce/SupprimerCommerce'; this.form.method='post'; submit();}" type="button" /></td>
+                </tr>
+            }
+        </table>
+        <input id="descCommerce" name="descCommerce" type="hidden"/>
+    </form>
+    <br />
+    <b>Ajouter un Commerce: </b>
+    <br />
+    <br />
+    <form asp-controller="Commerce" asp-action="AjouterCommerce" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Description"></label>
+                </td>
+                <td>
+                    <input asp-for="Description" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Adresse"></label>
+                </td>
+                <td>
+                    <input asp-for="Adresse" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Telephone"></label>
+                </td>
+                <td>
+                    <input asp-for="Telephone" />
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Ajouter" />
+    </form>
+    <br/>
+}

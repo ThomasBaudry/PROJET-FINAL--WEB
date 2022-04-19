@@ -1,0 +1,88 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model DepenseDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br />
+    <h3>Modifier une Dépense : </h3>
+    <br />
+    <form asp-controller="Depense" asp-action="ModifierDepense" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="DateTemps"></label>
+                </td>
+                <td>
+                    <input asp-for="DateTemps" class="inputreadonly" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Montant"></label>
+                </td>
+                <td>
+                    <input asp-for="Montant" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="MontantAdmissible"></label>
+                </td>
+                <td>
+                    <input asp-for="MontantAdmissible" class="inputreadonly" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Commerce"></label>
+                </td>
+                <td>
+                    <select asp-for="Commerce.Description">
+                        @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+                        {
+                            if (commerce.Description == ViewBag.DescCommerce)
+                            {
+                                <option selected>@commerce.Description</option>
+                            }
+                            else
+                            {
+                                <option>@commerce.Description</option>}
+                            }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Categorie"></label>
+                </td>
+                <td>
+                    <select asp-for="Categorie.Description">
+                        @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
+                        {
+                            if (categorie.Description == ViewBag.DescCategorieDepense)
+                            {
+                                <option selected>@categorie.Description</option>
+                            }
+                            else
+                            {
+                                <option>@categorie.Description</option>}
+                            }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier" onclick="document.getElementById('nomGarderie').value ='@ViewBag.nomGarderie';"/>
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();" />
+                </td>
+            </tr>
+        </table>
+    </form>
+}

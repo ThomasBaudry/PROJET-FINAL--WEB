@@ -50,7 +50,7 @@ namespace PROJET_FINAL__WEB.Controllers
         /// </summary>
         /// <param name="garderieDTO">Le DTO de la Garderie.</param>
         /// <returns>IActionResult</returns>
-        [Route("/Garderie/AjouterCegep")]
+        [Route("/Garderie/AjouterGarderie")]
         [HttpPost]
         public async Task<IActionResult> AjouterGarderie([FromForm] GarderieDTO garderieDTO)
         {
@@ -82,8 +82,8 @@ namespace PROJET_FINAL__WEB.Controllers
                 if (TempData["MessageErreur"] != null)
                     ViewBag.MessageErreur = TempData["MessageErreur"];
                 JsonValue jsonResponse = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirGarderie?nomGarderie=" + nomGarderie);
-                GarderieDTO cegep = JsonConvert.DeserializeObject<GarderieDTO>(jsonResponse.ToString());
-                return View(cegep);
+                GarderieDTO garderie = JsonConvert.DeserializeObject<GarderieDTO>(jsonResponse.ToString());
+                return View(garderie);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace PROJET_FINAL__WEB.Controllers
             catch (Exception e)
             {
                 TempData["MessageErreur"] = "Impossible de procéder à la modification." + e.Message;
-                return RedirectToAction("FormulaireModifierGarderie", "Cegep", new { nomGarderie = garderieDTO.Nom });
+                return RedirectToAction("FormulaireModifierGarderie", "Garderie", new { nomGarderie = garderieDTO.Nom });
             }
             //Lancement de l'action Index...
             return RedirectToAction("Index");
