@@ -1,0 +1,126 @@
+﻿@{ }
+@using PROJET_FINAL__WEB.Models
+@model DepenseDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+<br>
+                <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+ }
+else
+{ @*Affichage de la liste des cégeps et département...*@
+<h3>Sélectionner une Garderie :</h3>
+                <form asp-controller="Depense" asp-action="Index" method="get">
+                    <select name="nomGarderie" onchange="submit();">
+                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+                        {
+                            if (garderie.Nom == ViewBag.NomGarderie)
+                            {
+                                <option selected>@garderie.Nom</option>
+                            }
+                            else
+                            {
+                                <option>@garderie.Nom</option>}
+                            }
+                    </select>
+                </form>
+                <br>
+                <h3>Liste des dépense(s) (@ViewBag.ListeDepenses.Length Dépense(s)) :</h3>
+                <br>
+                <form asp-controller="" asp-action="" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>DateTemps</th>
+                                <th>Montant</th>
+                                <th>MontantAdmissible</th>
+                                @if (ViewBag.ListeDepenses.Length > 0)
+                                {
+                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Depense/ViderListeDepense'; this.form.method='post'; submit();}" type="button" /></th>
+                                }
+                            </tr>
+                            @foreach (DepenseDTO depense in ViewBag.ListeDepenses)
+                            {
+                                <tr>
+                                    <td>@depense.DateTemps</td>
+                                    <td>@depense.Montant</td>
+                                    <td>@depense.MontantAdmissible.ToString("0.00$")</td>
+                                    <td><input value="Modifier" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button"></td>
+                                </tr>
+                             }
+                            <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
+                            <input id="dateTemps" name="dateTemps" type="hidden">
+
+                            <script>
+                                function myFunction() {
+                                    confirm("Voulez-vous supprimer la Dépense ?");
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </form>
+                <b>Ajouter une dépense : </b>
+                <br>
+                <br>
+                <form asp-controller="Depense" asp-action="AjouterDepense" method="post">
+                    <input type="hidden" name="nomGarderie" value="@ViewBag.NomGarderie">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Montant"></label>
+                                </td>
+                                <td>
+                                    <input asp-for="Montant">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Commerce"></label>
+                                </td>
+                                <td>
+                                    <select asp-for="Commerce.Description">
+                                        @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+                                        {
+                                            if (commerce.Description == ViewBag.DescCommerce)
+                                            {
+                                                <option selected>@commerce.Description</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@commerce.Description</option>}
+                                            }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Categorie"></label>
+                                </td>
+                                <td>
+                                    <select asp-for="Categorie.Description">
+                                        @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
+                                        {
+                                            if (categorie.Description == ViewBag.DescCategorieDepense)
+                                            {
+                                                <option selected>@categorie.Description</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@categorie.Description</option>}
+                                            }
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Ajouter">
+                </form>
+                <br>
+}
