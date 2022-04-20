@@ -29,12 +29,12 @@ else
                     <td>@commerce.Description</td>
                     <td>@commerce.Adresse</td>
                     <td>@commerce.Telephone</td>
-                    <td><input value="Modifier" onclick="document.getElementById('descCommerce').value ='@commerce.Description'; this.form.action='/Commerce/FormulaireModifierCommerce'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('descCommerce').value ='@commerce.Description';if(confirm('Voulez-vous vraiment supprimer le Commerce?')==true){this.form.action='/Commmerce/SupprimerCommerce'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td><input value="Modifier" onclick="document.getElementById('descriptionCommerce').value ='@commerce.Description'; this.form.action='/Commerce/FormulaireModifierCommerce'; this.form.method='get'; submit();" type="button" /></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('descriptionCommerce').value ='@commerce.Description';if(confirm('Voulez-vous vraiment supprimer le Commerce?')==true){this.form.action='/Commerce/SupprimerCommerce'; this.form.method='post'; submit();}" type="button" /></td>
                 </tr>
             }
         </table>
-        <input id="descCommerce" name="descCommerce" type="hidden"/>
+        <input id="descriptionCommerce" name="descriptionCommerce" type="hidden"/>
     </form>
     <br />
     <b>Ajouter un Commerce: </b>
