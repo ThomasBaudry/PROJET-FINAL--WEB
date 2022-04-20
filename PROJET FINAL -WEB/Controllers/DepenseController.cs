@@ -130,11 +130,11 @@ namespace PROJET_FINAL__WEB.Controllers
                 ViewBag.DescCategorieDepense = depense.Categorie.Description;
 
                 JsonValue jsonResponseCommerce = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Commerce/ObtenirListeCommerce");
-                List<CommerceDTO> listeCommerce = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponse.ToString());
+                List<CommerceDTO> listeCommerce = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponseCommerce.ToString());
                 ViewBag.ListeCommerces = listeCommerce;
 
-                JsonValue jsonResponseCategorie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Commerce/ObtenirListeCategorieDepense");
-                List<CommerceDTO> listeCategorie = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponse.ToString());
+                JsonValue jsonResponseCategorie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ObtenirListeCategorieDepense");
+                List<CategorieDepenseDTO> listeCategorie = JsonConvert.DeserializeObject<List<CategorieDepenseDTO>>(jsonResponseCategorie.ToString());
                 ViewBag.ListeCategorieDepense = listeCategorie;
 
                 return View(depense);
