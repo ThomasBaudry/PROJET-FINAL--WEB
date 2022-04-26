@@ -34,6 +34,8 @@ else
                                 <th>DateTemps</th>
                                 <th>Montant</th>
                                 <th>MontantAdmissible</th>
+                                <th>Commerce</th>
+                                <th>Categorie</th>
                                 @if (ViewBag.ListeDepenses.Length > 0)
                                 {
                                     <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Depense/ViderListeDepense'; this.form.method='post'; submit();}" type="button" /></th>
@@ -45,8 +47,10 @@ else
                                     <td>@depense.DateTemps</td>
                                     <td>@depense.Montant</td>
                                     <td>@depense.MontantAdmissible.ToString("0.00$")</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('nomDepense').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button"></td>
+                                    <td>@depense.Commerce.Description</td>
+                                    <td>@depense.Categorie.Description</td>
+                                    <td><input value="Modifier" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">

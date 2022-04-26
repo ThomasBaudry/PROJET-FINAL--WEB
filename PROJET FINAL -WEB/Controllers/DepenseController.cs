@@ -107,5 +107,112 @@ namespace PROJET_FINAL__WEB.Controllers
             //Lancement de l'action Index...
             return RedirectToAction("Index", "Depense");
         }
+
+        /// <summary>
+        /// Action FormulaireModifierDepense.
+        /// Permet d'afficher le formulaire pour la modification d'une Dépense.
+        /// </summary>
+        /// <param name="nomGarderie">Nom de la Garderie.</param>
+        /// <param name="dateTemps">Date de la Depense.</param>
+        /// <returns>IActionResult</returns>
+        [Route("/Depense/FormulaireModifierDepense")]
+        [HttpGet]
+        public async Task<IActionResult> FormulaireModifierDepense([FromQuery] string nomGarderie, [FromQuery] string dateTemps)
+        {
+            try
+            {
+                if (TempData["MessageErreur"] != null)
+                    ViewBag.MessageErreur = TempData["MessageErreur"];
+                JsonValue jsonResponse = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/ObtenirDepense?dateTemps=" + dateTemps + "&nomGarderie=" + nomGarderie);
+                DepenseDTO depense = JsonConvert.DeserializeObject<DepenseDTO>(jsonResponse.ToString());
+                ViewBag.nomGarderie = nomGarderie;
+                ViewBag.DescCommerce = depense.Commerce.Description;
+                ViewBag.DescCategorieDepense = depense.Categorie.Description;
+
+                JsonValue jsonResponseCommerce = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Commerce/ObtenirListeCommerce");
+                List<CommerceDTO> listeCommerce = JsonConvert.DeserializeObject<List<CommerceDTO>>(jsonResponseCommerce.ToString());
+                ViewBag.ListeCommerces = listeCommerce;
+
+                JsonValue jsonResponseCategorie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ObtenirListeCategorieDepense");
+                List<CategorieDepenseDTO> listeCategorie = JsonConvert.DeserializeObject<List<CategorieDepenseDTO>>(jsonResponseCategorie.ToString());
+                ViewBag.ListeCategorieDepense = listeCategorie;
+
+                return View(depense);
+            }
+            catch (Exception e)
+            {
+                TempData["MessageErreur"] = "Impossible d'ouvrir le formulaire de modification. " + e.Message;
+            }
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Action ModifierDepense.
+        /// Permet de modifier une Dépense.
+        /// </summary>
+        /// <param name="depenseDTO">La Depense à modifier.</param>
+        /// <param name="nomGarderie">Nom de la Garderie.</param>
+        /// <returns>ActionResult</returns>
+        [Route("/Depense/ModifierDepense")]
+        [HttpPost]
+        public async Task<IActionResult> ModifierDepense([FromForm] DepenseDTO depenseDTO, [FromForm] string nomGarderie)
+        {
+            try
+            {
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/ModifierDepense?nomGarderie=" + nomGarderie, depenseDTO);
+            }
+            catch (Exception e)
+            {
+                TempData["MessageErreur"] = "Impossible de procéder à la modification." + e.Message;
+                return RedirectToAction("FormulaireModifierDepense", "Depense", new { nomDepense = depenseDTO.DateTemps, nomGarderie = nomGarderie });
+            }
+            //Lancement de l'action Index...
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Action SupprimerDepense.
+        /// Permet de supprimer une Depense.
+        /// </summary>
+        /// <param name="nomGarderie">Le nom de la Garderie.</param>
+        /// <param name="dateTemps">date de la Depense.</param>
+        /// <returns>ActionResult</returns>
+        [Route("/Depense/SupprimerDepense")]
+        [HttpPost]
+        public async Task<IActionResult> SupprimerDepense([FromForm] string dateTemps, [FromForm] string nomGarderie)
+        {
+            try
+            {
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/SupprimerDepense?datetemps=" + dateTemps + "&nomGarderie=" + nomGarderie, null);
+            }
+            catch (Exception e)
+            {
+                TempData["MessageErreur"] = e.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Action ViderListeDepense.
+        /// Permet de vider la liste des Dépenses.
+        /// <param name="nomGarderie">Le nom de la Garderie.</param>
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        [Route("/Depense/ViderListeDepense")]
+        [HttpPost]
+        public async Task<IActionResult> ViderListeDepense([FromForm] string nomGarderie)
+        {
+            try
+            {
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Depense/ViderListeDepense?nomGarderie=" + nomGarderie, null);
+            }
+            catch (Exception e)
+            {
+                TempData["MessageErreur"] = e.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
