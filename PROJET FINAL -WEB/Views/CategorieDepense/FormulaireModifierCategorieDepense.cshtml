@@ -1,0 +1,42 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model CategorieDepenseDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br />
+    <h3>Modifier une Catégorie de Dépense : </h3>
+    <br />
+    <form asp-controller="CategorieDepense" asp-action="ModifierCategorieDepense" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Description"></label>
+                </td>
+                <td>
+                    <input asp-for="Description" class="inputreadonly" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Pourcentage"></label>
+                </td>
+                <td>
+                    <input asp-for="Pourcentage" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier" />
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();" />
+                </td>
+            </tr>
+        </table>
+    </form>
+}

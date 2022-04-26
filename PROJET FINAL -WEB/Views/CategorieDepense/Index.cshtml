@@ -1,0 +1,63 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model CategorieDepenseDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    @*Affichage de la liste des Catégories de Dépenses...*@
+    <br />
+    <h3>Liste des catégorie(s) de dépense(s) (@ViewBag.ListeCategorieDepenses.Length CategorieDepense(s)) :</h3>
+    <br />
+    <form asp-controller="" asp-action="" method="post">
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Pourcentage</th>
+                @if(ViewBag.ListeCategorieDepenses.Length > 0)
+                {
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/CategorieDepense/ViderListeCategorieDepense'; this.form.method='post'; submit();}" type="button" /></th>
+                }
+            </tr>
+            @foreach (CategorieDepenseDTO categorieDepense in ViewBag.ListeCategorieDepenses)
+            {
+                <tr>
+                    <td>@categorieDepense.Description</td>
+                    <td>@categorieDepense.Pourcentage</td>
+                    <td><input value="Modifier" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description'; this.form.action='/CategorieDepense/FormulaireModifierCategorieDepense'; this.form.method='get'; submit();" type="button" /></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description';if(confirm('Voulez-vous vraiment supprimer la Catégorie de Dépense ?')==true){this.form.action='/CategorieDepense/SupprimerCategorieDepense'; this.form.method='post'; submit();}" type="button" /></td>
+                </tr>
+            }
+        </table>
+        <input id="descriptionCategorieDepense" name="descriptionCategorieDepense" type="hidden"/>
+    </form>
+    <br />
+    <b>Ajouter une Catégorie de Dépense: </b>
+    <br />
+    <br />
+    <form asp-controller="CategorieDepense" asp-action="AjouterCategorieDepense" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Description"></label>
+                </td>
+                <td>
+                    <input asp-for="Description" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Pourcentage"></label>
+                </td>
+                <td>
+                    <input asp-for="Pourcentage" />
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Ajouter" />
+    </form>
+    <br/>
+}
