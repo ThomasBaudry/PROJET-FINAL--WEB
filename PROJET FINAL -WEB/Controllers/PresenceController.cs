@@ -32,7 +32,7 @@ namespace PROJET_FINAL__WEB.Controllers
         {
             //Mettre le if et son contenu en commentaire avant de lancer les tests fonctionnels...
             //**Le contenu du ELSE doit toutefois rester actif...**//
-            //Si erreur provenant d'une autre action...
+            //Si erreur provenant d'une autre action
             if (TempData["MessageErreur"] != null)
                 ViewBag.MessageErreur = TempData["MessageErreur"];
             else
