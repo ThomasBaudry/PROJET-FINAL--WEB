@@ -46,8 +46,8 @@ namespace PROJET_FINAL__WEB.Controllers
                     }
                     if (nomEnfant == null)
                     {
-                        JsonValue jsonResponseEnfant = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
-                        nomEnfant = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfant.ToString()).ToArray()[0].Nom;
+                        JsonValue jsonResponseEnfantNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
+                        nomEnfant = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfantNom.ToString()).ToArray()[0].Nom;
                     }
 
                     //Préparation des données pour la vue...
