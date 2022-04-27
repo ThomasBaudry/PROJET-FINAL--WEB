@@ -1,0 +1,73 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model PresenceDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br />
+    <h3>Modifier une Présence : </h3>
+    <br />
+    <form asp-controller="Presence" asp-action="ModifierPresence" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Date"></label>
+                </td>
+                <td>
+                    <input asp-for="Date" class="inputreadonly" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Garderie"></label>
+                </td>
+                <td>
+                    <select asp-for="Garderie.Nom">
+                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+                        {
+                            if (garderie.Nom== ViewBag.NomGarderie)
+                            {
+                                <option selected>@garderie.Nom</option>
+                            }
+                            else
+                            {
+                                <option>@garderie.Nom</option>}
+                            }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Enfant"></label>
+                </td>
+                <td>
+                    <select asp-for="Enfant.Nom">
+                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
+                        {
+                            if (enfant.Nom == ViewBag.NomEnfant)
+                            {
+                                <option selected>@enfant.Nom</option>
+                            }
+                            else
+                            {
+                                <option>@enfant.Nom</option>}
+                            }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier" onclick="document.getElementById('nomEnfant').value ='@ViewBag.nomEnfant';"/>
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();" />
+                </td>
+            </tr>
+        </table>
+        <input id="nomGarderie" name="nomGarderie" type="hidden"/>
+    </form>
+}

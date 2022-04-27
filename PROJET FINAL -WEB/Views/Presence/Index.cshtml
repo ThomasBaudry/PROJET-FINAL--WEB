@@ -1,0 +1,132 @@
+﻿@{ }
+@using PROJET_FINAL__WEB.Models
+@model PresenceDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+<br>
+                <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+ }
+else
+{ @*Affichage de la liste des Garderies et des Présences des enfants...*@
+<h3>Sélectionner une Garderie :</h3>
+                <form asp-controller="Depense" asp-action="Index" method="get">
+                    <select name="nomGarderie" onchange="submit();">
+                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+                        {
+                            if (garderie.Nom == ViewBag.NomGarderie)
+                            {
+                                <option selected>@garderie.Nom</option>
+                            }
+                            else
+                            {
+                                <option>@garderie.Nom</option>}
+                            }
+                    </select>
+
+                    <select name="nomEnfant" onchange="submit();">
+                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
+                        {
+                            if (enfant.Nom == ViewBag.NomEnfant)
+                            {
+                                <option selected>@enfant.Nom</option>
+                            }
+                            else
+                            {
+                                <option>@enfant.Nom</option>}
+                            }
+                    </select>
+                </form>
+                <br>
+                <h3>Liste des Présence(s) (@ViewBag.ListePresences.Length Présence(s)) :</h3>
+                <br>
+                <form asp-controller="" asp-action="" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Date</th>
+                                <th>Garderie</th>
+                                <th>Enfant</th>
+                                @if (ViewBag.ListePresences.Length > 0)
+                                {
+                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Presence/ViderListePresence'; this.form.method='post'; submit();}" type="button" /></th>
+                                }
+                            </tr>
+                            @foreach (PresenceDTO presence in ViewBag.ListePresences)
+                            {
+                                <tr>
+                                    <td>@presence.Date</td>
+                                    <td>@presence.Garderie.Nom</td>
+                                    <td>@presence.Enfant.Nom</td>
+                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.Date'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.Date'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
+                                </tr>
+                             }
+                            <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
+                            <input id="nomEnfant" name="nomEnfant" type="hidden" value="@ViewBag.NomEnfant">
+                            <input id="date" name="date" type="hidden">
+
+                            <script>
+                                function myFunction() {
+                                    confirm("Voulez-vous supprimer la Présence ?");
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </form>
+                <b>Ajouter une dépense : </b>
+                <br>
+                <br>
+                <form asp-controller="Presence" asp-action="AjouterPresence" method="post">
+                    <input type="hidden" name="nomGarderie" value="@ViewBag.NomGarderie">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" asp-for="Date" value="@DateTime.Today">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Garderie"></label>
+                                </td>
+                                <td>
+                                    <select asp-for="Garderie.Nom">
+                                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+                                        {
+                                            if (garderie.Nom== ViewBag.NomGarderie)
+                                            {
+                                                <option selected>@garderie.Nom</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@garderie.Nom</option>}
+                                            }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Enfant"></label>
+                                </td>
+                                <td>
+                                    <select asp-for="Enfant.Nom">
+                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfant)
+                                        {
+                                            if (enfant.Nom== ViewBag.NomEnfant)
+                                            {
+                                                <option selected>@enfant.Nom</option>
+                                            }
+                                            else
+                                            {
+                                                <option>@enfant.Nom</option>}
+                                            }
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Ajouter">
+                </form>
+                <br>
+}
