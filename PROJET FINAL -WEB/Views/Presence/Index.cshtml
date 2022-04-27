@@ -23,19 +23,6 @@ else
                                 <option>@garderie.Nom</option>}
                             }
                     </select>
-
-                    <select name="nomEnfant" onchange="submit();">
-                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
-                        {
-                            if (enfant.Nom == ViewBag.NomEnfant)
-                            {
-                                <option selected>@enfant.Nom</option>
-                            }
-                            else
-                            {
-                                <option>@enfant.Nom</option>}
-                            }
-                    </select>
                 </form>
                 <br>
                 <h3>Liste des Présence(s) (@ViewBag.ListePresences.Length Présence(s)) :</h3>
@@ -74,7 +61,7 @@ else
                         </tbody>
                     </table>
                 </form>
-                <b>Ajouter une dépense : </b>
+                <b>Ajouter une présence : </b>
                 <br>
                 <br>
                 <form asp-controller="Presence" asp-action="AjouterPresence" method="post">
@@ -88,30 +75,11 @@ else
                             </tr>
                             <tr>
                                 <td>
-                                    <label asp-for="Garderie"></label>
-                                </td>
-                                <td>
-                                    <select asp-for="Garderie.Nom">
-                                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
-                                        {
-                                            if (garderie.Nom== ViewBag.NomGarderie)
-                                            {
-                                                <option selected>@garderie.Nom</option>
-                                            }
-                                            else
-                                            {
-                                                <option>@garderie.Nom</option>}
-                                            }
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <label asp-for="Enfant"></label>
                                 </td>
                                 <td>
                                     <select asp-for="Enfant.Nom">
-                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfant)
+                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
                                         {
                                             if (enfant.Nom== ViewBag.NomEnfant)
                                             {
