@@ -84,11 +84,11 @@ namespace PROJET_FINAL__WEB.Controllers
         /// <returns>IActionResult</returns>
         [Route("/Presence/AjouterPresence")]
         [HttpPost]
-        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] string nomEnfant, [FromForm] PresenceDTO presenceDTO)
+        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] PresenceDTO presenceDTO)
         {
             try
             {
-                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Presence/AjouterPresence?nomGarderie=" + nomGarderie + "+nomEnfant=" + nomEnfant, presenceDTO);
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Presence/AjouterPresence?nomGarderie=" + nomGarderie, presenceDTO);
             }
             catch (Exception e)
             {

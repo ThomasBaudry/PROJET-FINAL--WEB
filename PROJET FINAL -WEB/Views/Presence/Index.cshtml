@@ -10,7 +10,7 @@
 else
 { @*Affichage de la liste des Garderies et des Présences des enfants...*@
 <h3>Sélectionner une Garderie :</h3>
-                <form asp-controller="Depense" asp-action="Index" method="get">
+                <form asp-controller="Presence" asp-action="Index" method="get">
                     <select name="nomGarderie" onchange="submit();">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
@@ -32,7 +32,6 @@ else
                         <tbody>
                             <tr>
                                 <th>Date</th>
-                                <th>Garderie</th>
                                 <th>Enfant</th>
                                 @if (ViewBag.ListePresences.Length > 0)
                                 {
@@ -42,11 +41,10 @@ else
                             @foreach (PresenceDTO presence in ViewBag.ListePresences)
                             {
                                 <tr>
-                                    <td>@presence.Date</td>
-                                    <td>@presence.Garderie.Nom</td>
-                                    <td>@presence.Enfant.Nom</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.Date'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.Date'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
+                                    <td>@presence.DateTemps</td>
+                                    <td>@presence.Enfant.Nom @presence.Enfant.Prenom</td>
+                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.DateTemps'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.DateTemps'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
@@ -70,7 +68,7 @@ else
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" asp-for="Date" value="@DateTime.Today">
+                                    <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
                                 </td>
                             </tr>
                             <tr>

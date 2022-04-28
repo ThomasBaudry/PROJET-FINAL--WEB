@@ -19,7 +19,7 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Propriété représentant la date de naissance de l'Enfant.
         /// </summary>
-        public string DateNaissance { get; set; }
+        public string DateDeNaissance { get; set; }
         /// <summary>
         /// Propriété représentant l'adresse de l'Enfant.
         /// </summary>
@@ -57,7 +57,7 @@ namespace PROJET_FINAL__WEB.Models
         {
             Nom = nom;
             Prenom = prenom;
-            DateNaissance = dateNaissance;
+            DateDeNaissance = dateNaissance;
             Adresse = adresse;
             Ville = ville;
             Province = province;
