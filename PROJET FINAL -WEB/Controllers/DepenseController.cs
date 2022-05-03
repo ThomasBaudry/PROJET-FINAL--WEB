@@ -13,7 +13,7 @@ using System;
 namespace PROJET_FINAL__WEB.Controllers
 {
     /// <summary>
-    /// Classe représentant le controleur de vue des Dépenses.
+    /// Classe représentant le controleur de vue des  Dépenses.
     /// </summary>
     public class DepenseController : Controller
     {
