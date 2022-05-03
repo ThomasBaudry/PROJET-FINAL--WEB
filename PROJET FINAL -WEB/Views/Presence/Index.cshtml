@@ -10,7 +10,7 @@
 else
 { @*Affichage de la liste des Garderies et des Présences des enfants...*@
 <h3>Sélectionner une Garderie :</h3>
-                <form asp-controller="Depense" asp-action="Index" method="get">
+                <form asp-controller="Presence" asp-action="Index" method="get">
                     <select name="nomGarderie" onchange="submit();">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
@@ -23,19 +23,6 @@ else
                                 <option>@garderie.Nom</option>}
                             }
                     </select>
-
-                    <select name="nomEnfant" onchange="submit();">
-                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
-                        {
-                            if (enfant.Nom == ViewBag.NomEnfant)
-                            {
-                                <option selected>@enfant.Nom</option>
-                            }
-                            else
-                            {
-                                <option>@enfant.Nom</option>}
-                            }
-                    </select>
                 </form>
                 <br>
                 <h3>Liste des Présence(s) (@ViewBag.ListePresences.Length Présence(s)) :</h3>
@@ -45,7 +32,6 @@ else
                         <tbody>
                             <tr>
                                 <th>Date</th>
-                                <th>Garderie</th>
                                 <th>Enfant</th>
                                 @if (ViewBag.ListePresences.Length > 0)
                                 {
@@ -55,15 +41,13 @@ else
                             @foreach (PresenceDTO presence in ViewBag.ListePresences)
                             {
                                 <tr>
-                                    <td>@presence.Date</td>
-                                    <td>@presence.Garderie.Nom</td>
-                                    <td>@presence.Enfant.Nom</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.Date'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.Date'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
+                                    <td>@presence.DateTemps</td>
+                                    <td>@presence.Enfant.Nom @presence.Enfant.Prenom</td>
+                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.DateTemps'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.DateTemps'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
-                            <input id="nomEnfant" name="nomEnfant" type="hidden" value="@ViewBag.NomEnfant">
                             <input id="date" name="date" type="hidden">
 
                             <script>
@@ -74,7 +58,7 @@ else
                         </tbody>
                     </table>
                 </form>
-                <b>Ajouter une dépense : </b>
+                <b>Ajouter une présence : </b>
                 <br>
                 <br>
                 <form asp-controller="Presence" asp-action="AjouterPresence" method="post">
@@ -83,26 +67,7 @@ else
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" asp-for="Date" value="@DateTime.Today">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label asp-for="Garderie"></label>
-                                </td>
-                                <td>
-                                    <select asp-for="Garderie.Nom">
-                                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
-                                        {
-                                            if (garderie.Nom== ViewBag.NomGarderie)
-                                            {
-                                                <option selected>@garderie.Nom</option>
-                                            }
-                                            else
-                                            {
-                                                <option>@garderie.Nom</option>}
-                                            }
-                                    </select>
+                                    <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
                                 </td>
                             </tr>
                             <tr>
@@ -110,16 +75,16 @@ else
                                     <label asp-for="Enfant"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="Enfant.Nom">
-                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfant)
+                                    <select name="enfantInfo">
+                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
                                         {
-                                            if (enfant.Nom== ViewBag.NomEnfant)
+                                            if (enfant.Nom == ViewBag.NomEnfant && enfant.Prenom == ViewBag.PrenomEnfant && enfant.DateDeNaissance == ViewBag.DateDeNaissance)
                                             {
-                                                <option selected>@enfant.Nom</option>
+                                                <option selected>@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance</option>
                                             }
                                             else
                                             {
-                                                <option>@enfant.Nom</option>}
+                                                <option>@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance</option>}
                                             }
                                     </select>
                                 </td>

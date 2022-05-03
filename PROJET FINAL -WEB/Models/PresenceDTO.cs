@@ -9,15 +9,11 @@ namespace PROJET_FINAL__WEB.Models
     {
         #region Proprietes
         /// <summary>
-        /// Propriété représentant la date du moment de la présence de l'enfant.
+        /// Propriété représentant la date et l'heure de la Presence.
         /// </summary>
-        public string Date { get; set; }
+        public string DateTemps { get; set; }
         /// <summary>
-        /// Propriété reliant avec la Garderie.
-        /// </summary>
-        public GarderieDTO Garderie { get; set; }
-        /// <summary>
-        /// Propriété reliant avec l'Enfant.
+        /// Propriété représentant l'enfant de la Presence.
         /// </summary>
         public EnfantDTO Enfant { get; set; }
 
@@ -30,12 +26,12 @@ namespace PROJET_FINAL__WEB.Models
         /// <summary>
         /// Constructeur avec paramètres.
         /// </summary>
-        /// <param name="date">Date du moment de la présence de l'enfant.</param>
-        public PresenceDTO(string date = "", GarderieDTO garderieDTO = null, EnfantDTO enfantDTO= null)
+        /// <param name="dateTemps">Date et Heure de la Présence.</param>
+        /// <param name="unEnfant">Enfant de la Présence.</param>
+        public PresenceDTO(string dateTemps = "", EnfantDTO unEnfant = null)
         {
-            Date = date;
-            Garderie = garderieDTO;
-            Enfant = enfantDTO;
+            DateTemps = dateTemps;
+            Enfant = unEnfant;
         }
 
         #endregion Constructeurs

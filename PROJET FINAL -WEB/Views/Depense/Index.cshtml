@@ -8,7 +8,7 @@
                 <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
  }
 else
-{ @*Affichage de la liste des cégeps et département...*@
+{ @*Affichage de la liste des dépenses dans une garderie...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Depense" asp-action="Index" method="get">
                     <select name="nomGarderie" onchange="submit();">

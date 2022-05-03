@@ -28,11 +28,11 @@ namespace PROJET_FINAL__WEB.Controllers
         [Route("Presence/Index")]
         [Route("Presence/ObtenirListePresence")]
         [HttpGet]
-        public async Task<IActionResult> Index(string nomGarderie, string nomEnfant)
+        public async Task<IActionResult> Index(string nomGarderie)
         {
             //Mettre le if et son contenu en commentaire avant de lancer les tests fonctionnels...
             //**Le contenu du ELSE doit toutefois rester actif...**//
-            //Si erreur provenant d'une autre action...
+            //Si erreur provenant d'une autre action
             if (TempData["MessageErreur"] != null)
                 ViewBag.MessageErreur = TempData["MessageErreur"];
             else
@@ -44,15 +44,12 @@ namespace PROJET_FINAL__WEB.Controllers
                         JsonValue jsonResponseGarderieNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                         nomGarderie = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderieNom.ToString()).ToArray()[0].Nom;
                     }
-                    if (nomEnfant == null)
-                    {
-                        JsonValue jsonResponseEnfantNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
-                        nomEnfant = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfantNom.ToString()).ToArray()[0].Nom;
-                    }
+                    JsonValue jsonResponseEnfantNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
+                    EnfantDTO enfant = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfantNom.ToString()).ToArray()[0];
 
                     //Préparation des données pour la vue...
                     ViewBag.NomGarderie = nomGarderie;
-                    ViewBag.NomEnfant = nomEnfant;
+                    ViewBag.Enfant = enfant;
 
                     JsonValue jsonResponseGarderie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                     ViewBag.ListeGarderies = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderie.ToString()).ToArray();
@@ -84,11 +81,14 @@ namespace PROJET_FINAL__WEB.Controllers
         /// <returns>IActionResult</returns>
         [Route("/Presence/AjouterPresence")]
         [HttpPost]
-        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] string nomEnfant, [FromForm] PresenceDTO presenceDTO)
+        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] PresenceDTO presenceDTO, [FromForm] string enfantInfo)
         {
             try
             {
-                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Presence/AjouterPresence?nomGarderie=" + nomGarderie + "+nomEnfant=" + nomEnfant, presenceDTO);
+                string[] enfant = enfantInfo.Split(";");
+                presenceDTO.Enfant = new EnfantDTO(enfant[0], enfant[1], enfant[2], null, null, null, null);
+
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Presence/AjouterPresence?nomGarderie=" + nomGarderie, presenceDTO);
             }
             catch (Exception e)
             {
