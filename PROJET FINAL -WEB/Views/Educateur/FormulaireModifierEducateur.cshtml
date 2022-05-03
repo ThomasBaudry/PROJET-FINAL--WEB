@@ -1,0 +1,82 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model EducateurDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br />
+    <h3>Modifier un Educateur : </h3>
+    <br />
+    <form asp-controller="Educateur" asp-action="ModifierEducateur" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Nom"></label>
+                </td>
+                <td>
+                    <input asp-for="Nom" class="inputreadonly" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Prenom"></label>
+                </td>
+                <td>
+                    <input asp-for="Prenom" class="inputreadonly" readonly/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="DateDeNaissance"></label>
+                </td>
+                <td>
+                    <input asp-for="DateDeNaissance" class="inputreadonly" readonly/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Adresse"></label>
+                </td>
+                <td>
+                    <input asp-for="Adresse" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Ville"></label>
+                </td>
+                <td>
+                    <input asp-for="Ville" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Province"></label>
+                </td>
+                <td>
+                    <input asp-for="Province" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Telephone"></label>
+                </td>
+                <td>
+                    <input asp-for="Telephone" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier" />
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();" />
+                </td>
+            </tr>
+        </table>
+    </form>
+}
