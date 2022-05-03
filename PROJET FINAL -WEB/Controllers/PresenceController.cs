@@ -64,6 +64,9 @@ namespace PROJET_FINAL__WEB.Controllers
                     JsonValue jsonResponseEnfant = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
                     ViewBag.ListeEnfants = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfant.ToString()).ToArray();
 
+                    JsonValue jsonResponseEducateur = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Educateur/ObtenirListeEducateur");
+                    ViewBag.ListeEducateurs = JsonConvert.DeserializeObject<List<EducateurDTO>>(jsonResponseEducateur.ToString()).ToArray();
+
                 }
                 catch (Exception e)
                 {

@@ -69,7 +69,10 @@ else
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
+                                    <label asp-for="DateTemps"></label>
+                                </td>
+                                <td>
+                                    <input type="date" asp-for="DateTemps" value="@DateTime.Today">
                                 </td>
                             </tr>
                             <tr>
@@ -90,6 +93,13 @@ else
 }
                                         }
                                     </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label asp-for="Educateur"></label>
+                                </td>
+                                <td>
                                     <select name="educateurInfo">
                                         @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
                                         {
