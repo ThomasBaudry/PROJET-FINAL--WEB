@@ -1,5 +1,5 @@
 ﻿@using PROJET_FINAL__WEB.Models
-@model EnfantDTO;
+@model EducateurDTO;
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
 @if (ViewBag.MessageErreur != null)
 {
@@ -9,9 +9,9 @@
 else
 {
     <br />
-    <h3>Modifier un Enfant : </h3>
+    <h3>Modifier un Educateur : </h3>
     <br />
-    <form asp-controller="Enfant" asp-action="ModifierEnfant" method="post">
+    <form asp-controller="Educateur" asp-action="ModifierEducateur" method="post">
         <table>
             <tr>
                 <td>

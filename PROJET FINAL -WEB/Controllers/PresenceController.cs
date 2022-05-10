@@ -47,9 +47,13 @@ namespace PROJET_FINAL__WEB.Controllers
                     JsonValue jsonResponseEnfantNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
                     EnfantDTO enfant = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfantNom.ToString()).ToArray()[0];
 
+                    JsonValue jsonResponseEducateurNom = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Educateur/ObtenirListeEducateur");
+                    EducateurDTO educateur = JsonConvert.DeserializeObject<List<EducateurDTO>>(jsonResponseEducateurNom.ToString()).ToArray()[0];
+
                     //Préparation des données pour la vue...
                     ViewBag.NomGarderie = nomGarderie;
                     ViewBag.Enfant = enfant;
+                    ViewBag.Educateur = educateur;
 
                     JsonValue jsonResponseGarderie = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Garderie/ObtenirListeGarderie");
                     ViewBag.ListeGarderies = JsonConvert.DeserializeObject<List<GarderieDTO>>(jsonResponseGarderie.ToString()).ToArray();
@@ -59,6 +63,9 @@ namespace PROJET_FINAL__WEB.Controllers
 
                     JsonValue jsonResponseEnfant = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Enfant/ObtenirListeEnfant");
                     ViewBag.ListeEnfants = JsonConvert.DeserializeObject<List<EnfantDTO>>(jsonResponseEnfant.ToString()).ToArray();
+
+                    JsonValue jsonResponseEducateur = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Educateur/ObtenirListeEducateur");
+                    ViewBag.ListeEducateurs = JsonConvert.DeserializeObject<List<EducateurDTO>>(jsonResponseEducateur.ToString()).ToArray();
 
                 }
                 catch (Exception e)
@@ -81,12 +88,15 @@ namespace PROJET_FINAL__WEB.Controllers
         /// <returns>IActionResult</returns>
         [Route("/Presence/AjouterPresence")]
         [HttpPost]
-        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] PresenceDTO presenceDTO, [FromForm] string enfantInfo)
+        public async Task<IActionResult> AjouterPresence([FromForm] string nomGarderie, [FromForm] PresenceDTO presenceDTO, [FromForm] string enfantInfo, [FromForm] string educateurInfo)
         {
             try
             {
                 string[] enfant = enfantInfo.Split(";");
                 presenceDTO.Enfant = new EnfantDTO(enfant[0], enfant[1], enfant[2], null, null, null, null);
+
+                string[] educateur = educateurInfo.Split(";");
+                presenceDTO.Educateur = new EducateurDTO(educateur[0], educateur[1], educateur[2], null, null, null, null);
 
                 await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/Presence/AjouterPresence?nomGarderie=" + nomGarderie, presenceDTO);
             }

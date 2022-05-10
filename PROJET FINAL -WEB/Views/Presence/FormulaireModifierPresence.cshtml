@@ -35,8 +35,27 @@ else
                             }
                             else
                             {
-                                <option>@enfant.Nom</option>}
+                                <option>@enfant.Nom</option>
+}
+                        }
+                    </select>
+                </td>
+                <td>
+                    <label asp-for="Educateur"></label>
+                </td>
+                <td>
+                    <select asp-for="Educateur.Nom">
+                        @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
+                        {
+                            if (educateur.Nom == ViewBag.NomEducateur)
+                            {
+                                <option selected>@educateur.Nom</option>
                             }
+                            else
+                            {
+                                <option>@educateur.Nom</option>
+}
+                        }
                     </select>
                 </td>
             </tr>

@@ -1,5 +1,5 @@
 ﻿@using PROJET_FINAL__WEB.Models
-@model GarderieDTO;
+@model EducateurDTO;
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
 @if (ViewBag.MessageErreur != null)
 {
@@ -8,43 +8,47 @@
 }
 else
 {
-    @*Affichage de la liste des Garderies...*@
+    @*Affichage de la liste des Educateurs...*@
     <br />
-    <h3>Liste des garderie(s) (@ViewBag.ListeGarderies.Length Garderie(s)) :</h3>
+    <h3>Liste des Educateur(s) (@ViewBag.ListeEducateurs.Length Educateur(s)) :</h3>
     <br />
     <form asp-controller="" asp-action="" method="post">
         <table>
             <tr>
                 <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de Naissance</th>
                 <th>Adresse</th>
                 <th>Ville</th>
                 <th>Province</th>
                 <th>Téléphone</th>
-                @if(ViewBag.ListeGarderies.Length > 0)
+                @if(ViewBag.ListeEducateurs.Length > 0)
                 {
-                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Garderie/ViderListeGarderie'; this.form.method='post'; submit();}" type="button" /></th>
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Educateur/ViderListeEducateur'; this.form.method='post'; submit();}" type="button" /></th>
                 }
             </tr>
-            @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+            @foreach (EducateurDTO Educateur in ViewBag.ListeEducateurs)
             {
                 <tr>
-                    <td>@garderie.Nom</td>
-                    <td>@garderie.Adresse</td>
-                    <td>@garderie.Ville</td>
-                    <td>@garderie.Province</td>
-                    <td>@garderie.Telephone</td>
-                    <td><input value="Modifier" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireModifierGarderie'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom';if(confirm('Voulez-vous vraiment supprimer la Garderie?')==true){this.form.action='/Garderie/SupprimerGarderie'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td>@Educateur.Nom</td>
+                    <td>@Educateur.Prenom</td>
+                    <td>@Educateur.DateDeNaissance</td>
+                    <td>@Educateur.Adresse</td>
+                    <td>@Educateur.Ville</td>
+                    <td>@Educateur.Province</td>
+                    <td>@Educateur.Telephone</td>
+                    <td><input value="Modifier" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom'; this.form.action='/Educateur/FormulaireModifierEducateur'; this.form.method='get'; submit();" type="button" /></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom';if(confirm('Voulez-vous vraiment supprimer l°Educateur?')==true){this.form.action='/Educateur/SupprimerEducateur'; this.form.method='post'; submit();}" type="button" /></td>
                 </tr>
             }
         </table>
-        <input id="nomGarderie" name="nomGarderie" type="hidden"/>
+        <input id="nomEducateur" name="nomEducateur" type="hidden"/>
     </form>
     <br />
-    <b>Ajouter une Garderie : </b>
+    <b>Ajouter un Educateur: </b>
     <br />
     <br />
-    <form asp-controller="Garderie" asp-action="AjouterGarderie" method="post">
+    <form asp-controller="Educateur" asp-action="AjouterEducateur" method="post">
         <table>
             <tr>
                 <td>
@@ -52,6 +56,22 @@ else
                 </td>
                 <td>
                     <input asp-for="Nom" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Prenom"></label>
+                </td>
+                <td>
+                    <input asp-for="Prenom" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="DateDeNaissance"></label>
+                </td>
+                <td>
+                    <input asp-for="DateDeNaissance" type="date" />
                 </td>
             </tr>
             <tr>
