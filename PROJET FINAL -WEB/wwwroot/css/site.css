@@ -78,3 +78,7 @@ body {
     background-color: rgb(148 163 184) !important;
     color: white !important;
 }
+
+.column {
+    width: 100%;
+}
