@@ -11,7 +11,34 @@ else
 { @*Affichage de la liste des dépenses dans une garderie...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Depense" asp-action="Index" method="get">
-                    <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    @if(ViewBag.ListeGarderies.Length <= 6)
+                    {
+                        <div class="form-check">
+                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
+                        {
+                            if (garderie.Nom == ViewBag.NomGarderie)
+                            {
+                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom" checked>
+                                <label class="form-check-label" for="nomGarderie">
+                                @garderie.Nom
+                                </label>
+                                <br>
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom">
+                                <label class="form-check-label" for="nomGarderie">
+                                @garderie.Nom
+                                </label>
+                                <br>
+                            }
+                    
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
                             if (garderie.Nom == ViewBag.NomGarderie)
@@ -22,7 +49,8 @@ else
                             {
                                 <option>@garderie.Nom</option>}
                             }
-                    </select>
+                        </select>
+                    }
                 </form>
                 <br>
                 <h3>Liste des dépense(s) (@ViewBag.ListeDepenses.Length Dépense(s)) :</h3>
@@ -89,7 +117,34 @@ else
                                     <label asp-for="Commerce" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="Commerce.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    @if(ViewBag.ListeCommerces.Length <= 6)
+                                    {
+                                        <div class="form-check">
+                                        @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+                                        {
+                                            if (commerce.Description == ViewBag.DescCommerce)
+                                            {
+                                                <input class="form-check-input" type="radio" asp-for="Commerce.Description" value="@commerce.Description" checked>
+                                                <label class="form-check-label" asp-for="Commerce.Description">
+                                                @commerce.Description
+                                                </label>
+                                                <br>
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" asp-for="Commerce.Description" value="@commerce.Description">
+                                                <label class="form-check-label" asp-for="Commerce.Description">
+                                                @commerce.Description
+                                                </label>
+                                                <br>
+                                            }
+                    
+                                        }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="Commerce.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
                                         {
                                             if (commerce.Description == ViewBag.DescCommerce)
@@ -100,7 +155,8 @@ else
                                             {
                                                 <option>@commerce.Description</option>}
                                             }
-                                    </select>
+                                        </select>
+                                    }
                                 </td>
                             </tr>
                             <tr class="input-group input-group-sm mb-3">
@@ -108,7 +164,34 @@ else
                                     <label asp-for="Categorie" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="Categorie.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    @if(ViewBag.ListeCategorieDepense.Length <= 6)
+                                    {
+                                        <div class="form-check">
+                                        @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
+                                        {
+                                            if (categorie.Description == ViewBag.DescCategorieDepense)
+                                            {
+                                                <input class="form-check-input" type="radio" asp-for="Categorie.Description" value="@categorie.Description" checked>
+                                                <label class="form-check-label" asp-for="Categorie.Description">
+                                                @categorie.Description
+                                                </label>
+                                                <br>
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" asp-for="Categorie.Description" value="@categorie.Description">
+                                                <label class="form-check-label" asp-for="Categorie.Description">
+                                                @categorie.Description
+                                                </label>
+                                                <br>
+                                            }
+                    
+                                        }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="Categorie.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
                                         {
                                             if (categorie.Description == ViewBag.DescCategorieDepense)
@@ -120,6 +203,7 @@ else
                                                 <option>@categorie.Description</option>}
                                             }
                                     </select>
+                                    }
                                 </td>
                             </tr>
                         </tbody>
