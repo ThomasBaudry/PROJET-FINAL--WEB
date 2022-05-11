@@ -1,6 +1,7 @@
 ﻿@using PROJET_FINAL__WEB.Models
 @model FinanceDTO;
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
+
 @if (ViewBag.MessageErreur != null)
 {
     <br />
@@ -11,9 +12,32 @@ else
     <br />
     <h3>Formulaire de la Garderie : @ViewBag.NomGarderie</h3>
     <br />
-    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Revenu</label>
-    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Depenses</label>
-    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Profit</label>
-                                     
-    
+    <h5>Cette page permet de produire le raapport financier de la Garderie @ViewBag.NomGarderie selon les éléments suivants :</h5>
+    <h6>°Revenu = nombre de présence * 8$</h6>
+    <h6>°Dépenses = total des dépenses admissibles + nombre de journées * nombre d'éducateurs * 8h * 18$ (salaire)</h6>
+    <h6>°Profit = Revenu - Dépenses</h6>
+    <br />
+    <br />
+    <table>
+        <tr class="input-group input-group-sm mb-3" text-align="center">
+            <td>
+                <label asp-for="Revenu" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">Son revenu est de : @ViewBag.Finance.Revenu$</label>
+            </td>
+        </tr>
+        <tr class="input-group input-group-sm mb-3">
+            <td>
+                <label asp-for="Depenses" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">Ses dépenses sont de : @ViewBag.Finance.Depenses$</label>
+            </td>
+        </tr>
+        <tr class="input-group input-group-sm mb-3">
+            <td>
+                <label asp-for="Profit" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> Son profit est donc de : @ViewBag.Finance.Profit$</label>
+            </td>
+        </tr>
+    </table>
+    <tr class="input-group input-group-sm mb-3">
+        <td>
+            <input type="button" value="Annuler" onclick="history.back();" class="btn btn-outline-primary" />
+        </td>
+    </tr>
 }
