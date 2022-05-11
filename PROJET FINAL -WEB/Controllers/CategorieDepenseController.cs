@@ -147,7 +147,7 @@ namespace PROJET_FINAL__WEB.Controllers
         {
             try
             {
-                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ViderCategorieDepense", null);
+                await WebAPI.Instance.PostAsync("http://" + Program.HOST + ":" + Program.PORT + "/CategorieDepense/ViderListeCategorieDepense", null);
             }
             catch (Exception e)
             {

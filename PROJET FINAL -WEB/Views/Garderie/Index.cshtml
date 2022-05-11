@@ -35,6 +35,7 @@ else
                     <td>@garderie.Telephone</td>
                     <td><input value="Modifier" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireModifierGarderie'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"/></td>
                     <td><input value="Supprimer" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom';if(confirm('Voulez-vous vraiment supprimer la Garderie?')==true){this.form.action='/Garderie/SupprimerGarderie'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-danger" /></td>
+                    <td><input value="Finance" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireFinance'; this.form.method='get'; submit();" type="button" class="btn btn-outline-info" /></td>
                 </tr>
             }
         </table>

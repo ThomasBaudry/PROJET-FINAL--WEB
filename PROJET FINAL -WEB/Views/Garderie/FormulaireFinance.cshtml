@@ -1,0 +1,19 @@
+﻿@using PROJET_FINAL__WEB.Models
+@model FinanceDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br />
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br />
+    <h3>Formulaire de la Garderie : @ViewBag.NomGarderie</h3>
+    <br />
+    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Revenu</label>
+    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Depenses</label>
+    <label type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">@ViewBag.Finance.Profit</label>
+                                     
+    
+}
