@@ -13,20 +13,20 @@ else
     <br />
     <form asp-controller="Presence" asp-action="ModifierPresence" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="DateTemps"></label>
+                    <label asp-for="DateTemps" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="DateTemps" class="inputreadonly" readonly />
+                    <input asp-for="DateTemps" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Enfant"></label>
+                    <label asp-for="Enfant" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Enfant.Nom">
+                    <select asp-for="Enfant.Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
                         {
                             if (enfant.Nom == ViewBag.NomEnfant)
@@ -41,10 +41,10 @@ else
                     </select>
                 </td>
                 <td>
-                    <label asp-for="Educateur"></label>
+                    <label asp-for="Educateur" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Educateur.Nom">
+                    <select asp-for="Educateur.Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
                         {
                             if (educateur.Nom == ViewBag.NomEducateur)
@@ -59,12 +59,12 @@ else
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <input type="submit" value="Modifier" onclick="document.getElementById('nomEnfant').value ='@ViewBag.nomEnfant';"/>
+                    <input type="submit" value="Modifier" onclick="document.getElementById('nomEnfant').value ='@ViewBag.nomEnfant';" class="btn btn-outline-success"/>
                 </td>
                 <td>
-                    <input type="button" value="Annuler" onclick="history.back();" />
+                    <input type="button" value="Annuler" onclick="history.back();" class="btn btn-outline-primary"/>
                 </td>
             </tr>
         </table>

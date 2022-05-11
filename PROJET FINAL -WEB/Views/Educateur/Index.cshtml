@@ -24,7 +24,7 @@ else
                 <th>Téléphone</th>
                 @if(ViewBag.ListeEducateurs.Length > 0)
                 {
-                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Educateur/ViderListeEducateur'; this.form.method='post'; submit();}" type="button" /></th>
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Educateur/ViderListeEducateur'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-warning"/></th>
                 }
             </tr>
             @foreach (EducateurDTO Educateur in ViewBag.ListeEducateurs)
@@ -37,8 +37,8 @@ else
                     <td>@Educateur.Ville</td>
                     <td>@Educateur.Province</td>
                     <td>@Educateur.Telephone</td>
-                    <td><input value="Modifier" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom'; this.form.action='/Educateur/FormulaireModifierEducateur'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom';if(confirm('Voulez-vous vraiment supprimer l°Educateur?')==true){this.form.action='/Educateur/SupprimerEducateur'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td><input value="Modifier" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom'; this.form.action='/Educateur/FormulaireModifierEducateur'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"/></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('nomEducateur').value ='@Educateur.Nom';if(confirm('Voulez-vous vraiment supprimer l°Educateur?')==true){this.form.action='/Educateur/SupprimerEducateur'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-danger"/></td>
                 </tr>
             }
         </table>
@@ -50,52 +50,52 @@ else
     <br />
     <form asp-controller="Educateur" asp-action="AjouterEducateur" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Nom"></label>
+                    <label asp-for="Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Nom" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Prenom"></label>
-                </td>
-                <td>
-                    <input asp-for="Prenom" />
+                    <input asp-for="Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="DateDeNaissance"></label>
+                    <label asp-for="Prenom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="DateDeNaissance" type="date" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Adresse"></label>
-                </td>
-                <td>
-                    <input asp-for="Adresse" />
+                    <input asp-for="Prenom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Ville"></label>
+                    <label asp-for="DateDeNaissance" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Ville" />
+                    <input asp-for="DateDeNaissance" type="date" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Province"></label>
+                    <label asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Province">
+                    <input asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    <input asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    <select asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         <option selected>Alberta</option>
                         <option>British Columbia</option>
                         <option>Manitoba</option>
@@ -109,16 +109,16 @@ else
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Telephone"></label>
+                    <label asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Telephone" />
+                    <input asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Ajouter" />
+        <input type="submit" value="Ajouter" class="btn btn-outline-primary"/>
     </form>
     <br/>
 }

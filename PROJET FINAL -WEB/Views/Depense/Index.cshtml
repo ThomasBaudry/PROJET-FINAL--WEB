@@ -11,7 +11,7 @@ else
 { @*Affichage de la liste des dépenses dans une garderie...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Depense" asp-action="Index" method="get">
-                    <select name="nomGarderie" onchange="submit();">
+                    <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
                             if (garderie.Nom == ViewBag.NomGarderie)
@@ -38,7 +38,7 @@ else
                                 <th>Categorie</th>
                                 @if (ViewBag.ListeDepenses.Length > 0)
                                 {
-                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Depense/ViderListeDepense'; this.form.method='post'; submit();}" type="button" /></th>
+                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Depense/ViderListeDepense'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-warning"/></th>
                                 }
                             </tr>
                             @foreach (DepenseDTO depense in ViewBag.ListeDepenses)
@@ -49,8 +49,8 @@ else
                                     <td>@depense.MontantAdmissible.ToString("0.00$")</td>
                                     <td>@depense.Commerce.Description</td>
                                     <td>@depense.Categorie.Description</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button"></td>
+                                    <td><input value="Modifier" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; this.form.action='/Depense/FormulaireModifierDepense'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"></td>
+                                    <td><input value="Supprimer" onclick="document.getElementById('dateTemps').value ='@depense.DateTemps'; myFunction(); this.form.action='/Depense/SupprimerDepense'; this.form.method='post'; submit();" type="button" class="btn btn-outline-danger"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
@@ -71,25 +71,25 @@ else
                     <input type="hidden" name="nomGarderie" value="@ViewBag.NomGarderie">
                     <table>
                         <tbody>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
                                     <input type="hidden" asp-for="DateTemps" value="@DateTime.Today">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="Montant"></label>
+                                    <label asp-for="Montant" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <input asp-for="Montant">
+                                    <input asp-for="Montant" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="Commerce"></label>
+                                    <label asp-for="Commerce" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="Commerce.Description">
+                                    <select asp-for="Commerce.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
                                         {
                                             if (commerce.Description == ViewBag.DescCommerce)
@@ -103,12 +103,12 @@ else
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="Categorie"></label>
+                                    <label asp-for="Categorie" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select asp-for="Categorie.Description">
+                                    <select asp-for="Categorie.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
                                         {
                                             if (categorie.Description == ViewBag.DescCategorieDepense)
@@ -124,7 +124,7 @@ else
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Ajouter">
+                    <input type="submit" value="Ajouter" class="btn btn-outline-primary">
                 </form>
                 <br>
 }

@@ -9,40 +9,40 @@
 else
 {
     <br />
-    <h3>Modifier une Commerce : </h3>
+    <h3>Modifier un Commerce : </h3>
     <br />
     <form asp-controller="Commerce" asp-action="ModifierCommerce" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Description"></label>
+                    <label asp-for="Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Description" class="inputreadonly" readonly />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Adresse"></label>
-                </td>
-                <td>
-                    <input asp-for="Adresse" />
+                    <input asp-for="Description" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Telephone"></label>
+                    <label asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Telephone" />
+                    <input asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <input type="submit" value="Modifier" />
+                    <label asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input type="button" value="Annuler" onclick="history.back();" />
+                    <input asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <input type="submit" value="Modifier" class="btn btn-outline-success"/>
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();" class="btn btn-outline-primary"/>
                 </td>
             </tr>
         </table>

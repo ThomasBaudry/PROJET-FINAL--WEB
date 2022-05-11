@@ -13,16 +13,16 @@ else
     <h3>Liste des garderie(s) (@ViewBag.ListeGarderies.Length Garderie(s)) :</h3>
     <br />
     <form asp-controller="" asp-action="" method="post">
-        <table>
+        <table class="table table-striped table-hover">
             <tr>
                 <th>Nom</th>
                 <th>Adresse</th>
                 <th>Ville</th>
                 <th>Province</th>
                 <th>Téléphone</th>
-                @if(ViewBag.ListeGarderies.Length > 0)
+                @if (ViewBag.ListeGarderies.Length > 0)
                 {
-                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Garderie/ViderListeGarderie'; this.form.method='post'; submit();}" type="button" /></th>
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Garderie/ViderListeGarderie'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-warning"/></th>
                 }
             </tr>
             @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
@@ -33,12 +33,12 @@ else
                     <td>@garderie.Ville</td>
                     <td>@garderie.Province</td>
                     <td>@garderie.Telephone</td>
-                    <td><input value="Modifier" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireModifierGarderie'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom';if(confirm('Voulez-vous vraiment supprimer la Garderie?')==true){this.form.action='/Garderie/SupprimerGarderie'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td><input value="Modifier" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom'; this.form.action='/Garderie/FormulaireModifierGarderie'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"/></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('nomGarderie').value ='@garderie.Nom';if(confirm('Voulez-vous vraiment supprimer la Garderie?')==true){this.form.action='/Garderie/SupprimerGarderie'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-danger" /></td>
                 </tr>
             }
         </table>
-        <input id="nomGarderie" name="nomGarderie" type="hidden"/>
+        <input id="nomGarderie" name="nomGarderie" type="hidden" />
     </form>
     <br />
     <b>Ajouter une Garderie : </b>
@@ -46,36 +46,36 @@ else
     <br />
     <form asp-controller="Garderie" asp-action="AjouterGarderie" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Nom"></label>
+                    <label asp-for="Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Nom" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Adresse"></label>
-                </td>
-                <td>
-                    <input asp-for="Adresse" />
+                    <input asp-for="Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Ville"></label>
+                    <label asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Ville" />
+                    <input asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Province"></label>
+                    <label asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Province">
+                    <input asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    <select asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         <option selected>Alberta</option>
                         <option>British Columbia</option>
                         <option>Manitoba</option>
@@ -89,16 +89,16 @@ else
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Telephone"></label>
+                    <label asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Telephone" />
+                    <input asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Ajouter" />
+        <input type="submit" value="Ajouter" class="btn btn-outline-primary"/>
     </form>
-    <br/>
+    <br />
 }
