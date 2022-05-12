@@ -26,37 +26,93 @@ else
                     <label asp-for="Enfant" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Enfant.Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    @if(ViewBag.ListeEnfants.Length <= 6)
+                    {
+                        <div class="form-check">
                         @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
                         {
-                            if (enfant.Nom == ViewBag.NomEnfant)
+                            if (enfant.Nom == ViewBag.Enfant.Nom && enfant.Prenom == ViewBag.Enfant.Prenom && enfant.DateDeNaissance == ViewBag.Enfant.DateDeNaissance)
                             {
-                                <option selected>@enfant.Nom</option>
+                                <input class="form-check-input" type="radio" name="enfantInfo" value="@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance" checked>
+                                <label class="form-check-label" name="enfantInfo">
+                                @enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance
+                                </label>
+                                <br>
                             }
                             else
                             {
-                                <option>@enfant.Nom</option>
+                                <input class="form-check-input" type="radio" name="enfantInfo" value="@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance">
+                                <label class="form-check-label" name="enfantInfo">
+                                @enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance
+                                </label>
+                                <br>
+                            }
+                    
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <select name="enfantInfo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
+                        {
+                            if (enfant.Nom == ViewBag.Enfant.Nom && enfant.Prenom == ViewBag.Enfant.Prenom && enfant.DateDeNaissance == ViewBag.Enfant.DateDeNaissance)
+                            {
+                                <option selected>@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance</option>
+                            }
+                            else
+                            {
+                                <option>@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance</option>
 }
                         }
-                    </select>
+                        </select>
+                    }
                 </td>
                 <td>
                     <label asp-for="Educateur" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Educateur.Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    @if(ViewBag.ListeEducateurs.Length <= 6)
+                    {
+                        <div class="form-check">
                         @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
                         {
-                            if (educateur.Nom == ViewBag.NomEducateur)
+                            if (educateur.Nom == ViewBag.Educateur.Nom && educateur.Prenom == ViewBag.Educateur.Prenom && educateur.DateDeNaissance == ViewBag.Educateur.DateDeNaissance)
                             {
-                                <option selected>@educateur.Nom</option>
+                                <input class="form-check-input" type="radio" name="educateurInfo" value="@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance" checked>
+                                <label class="form-check-label" name="educateurInfo">
+                                @educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance
+                                </label>
+                                <br>
                             }
                             else
                             {
-                                <option>@educateur.Nom</option>
+                                <input class="form-check-input" type="radio" name="educateurInfo" value="@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance">
+                                <label class="form-check-label" name="educateurInfo">
+                                @educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance
+                                </label>
+                                <br>
+                            }
+                    
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <select name="educateurInfo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
+                        {
+                            if (educateur.Nom == ViewBag.Educateur.Nom && educateur.Prenom == ViewBag.Educateur.Prenom && educateur.DateDeNaissance == ViewBag.Educateur.DateDeNaissance)
+                            {
+                                <option selected>@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance</option>
+                            }
+                            else
+                            {
+                                <option>@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance</option>
 }
                         }
-                    </select>
+                        </select>
+                    }
                 </td>
             </tr>
             <tr class="input-group input-group-sm mb-3">

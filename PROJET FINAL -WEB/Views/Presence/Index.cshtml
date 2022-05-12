@@ -11,34 +11,7 @@ else
 { @*Affichage de la liste des Garderies et des Présences des enfants et des éducateurs...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Presence" asp-action="Index" method="get">
-                    @if(ViewBag.ListeGarderies.Length <= 6)
-                    {
-                        <div class="form-check">
-                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
-                        {
-                            if (garderie.Nom == ViewBag.NomGarderie)
-                            {
-                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom" checked>
-                                <label class="form-check-label" for="nomGarderie">
-                                @garderie.Nom
-                                </label>
-                                <br>
-                            }
-                            else
-                            {
-                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom">
-                                <label class="form-check-label" for="nomGarderie">
-                                @garderie.Nom
-                                </label>
-                                <br>
-                            }
-                    
-                        }
-                        </div>
-                    }
-                    else
-                    {
-                        <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
                             if (garderie.Nom == ViewBag.NomGarderie)
@@ -49,8 +22,7 @@ else
                             {
                                 <option>@garderie.Nom</option>}
                             }
-                        </select>
-                    }
+                     </select>
                 </form>
                 <br>
                 <h3>Liste des Présence(s) (@ViewBag.ListePresences.Length Présence(s)) :</h3>
@@ -62,10 +34,6 @@ else
                                 <th>Date</th>
                                 <th>Enfant</th>
                                 <th>Educateur</th>
-                                @if (ViewBag.ListePresences.Length > 0)
-                                {
-                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Presence/ViderListePresence'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-warning"/></th>
-                                }
                             </tr>
                             @foreach (PresenceDTO presence in ViewBag.ListePresences)
                             {
@@ -73,8 +41,6 @@ else
                                     <td>@presence.DateTemps</td>
                                     <td>@presence.Enfant.Nom @presence.Enfant.Prenom</td>
                                     <td>@presence.Educateur.Nom @presence.Educateur.Prenom</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.DateTemps'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.DateTemps'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button" class="btn btn-outline-danger"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">

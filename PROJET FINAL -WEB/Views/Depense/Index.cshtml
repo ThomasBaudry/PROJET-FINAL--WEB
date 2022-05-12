@@ -11,34 +11,7 @@ else
 { @*Affichage de la liste des dépenses dans une garderie...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Depense" asp-action="Index" method="get">
-                    @if(ViewBag.ListeGarderies.Length <= 6)
-                    {
-                        <div class="form-check">
-                        @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
-                        {
-                            if (garderie.Nom == ViewBag.NomGarderie)
-                            {
-                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom" checked>
-                                <label class="form-check-label" for="nomGarderie">
-                                @garderie.Nom
-                                </label>
-                                <br>
-                            }
-                            else
-                            {
-                                <input class="form-check-input" type="radio" name="nomGarderie" onchange="submit();" value="@garderie.Nom">
-                                <label class="form-check-label" for="nomGarderie">
-                                @garderie.Nom
-                                </label>
-                                <br>
-                            }
-                    
-                        }
-                        </div>
-                    }
-                    else
-                    {
-                        <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
                             if (garderie.Nom == ViewBag.NomGarderie)
@@ -49,8 +22,7 @@ else
                             {
                                 <option>@garderie.Nom</option>}
                             }
-                        </select>
-                    }
+                    </select>
                 </form>
                 <br>
                 <h3>Liste des dépense(s) (@ViewBag.ListeDepenses.Length Dépense(s)) :</h3>
