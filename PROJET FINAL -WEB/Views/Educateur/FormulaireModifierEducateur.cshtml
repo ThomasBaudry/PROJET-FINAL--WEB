@@ -13,52 +13,52 @@ else
     <br />
     <form asp-controller="Educateur" asp-action="ModifierEducateur" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Nom"></label>
+                    <label asp-for="Nom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Nom" class="inputreadonly" readonly />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Prenom"></label>
-                </td>
-                <td>
-                    <input asp-for="Prenom" class="inputreadonly" readonly/>
+                    <input asp-for="Nom" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="DateDeNaissance"></label>
+                    <label asp-for="Prenom" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="DateDeNaissance" class="inputreadonly" readonly/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Adresse"></label>
-                </td>
-                <td>
-                    <input asp-for="Adresse" />
+                    <input asp-for="Prenom" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Ville"></label>
+                    <label asp-for="DateDeNaissance" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Ville" />
+                    <input asp-for="DateDeNaissance" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Province"></label>
+                    <label asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Province">
+                    <input asp-for="Adresse" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    <input asp-for="Ville" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    <select asp-for="Province" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         <option selected value="Province"></option>
                         <option>Alberta</option>
                         <option>British Columbia</option>
@@ -73,20 +73,20 @@ else
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Telephone"></label>
+                    <label asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Telephone" />
+                    <input asp-for="Telephone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <input type="submit" value="Modifier" />
+                    <input type="submit" value="Modifier" class="btn btn-outline-success"/>
                 </td>
                 <td>
-                    <input type="button" value="Annuler" onclick="history.back();" />
+                    <input type="button" value="Annuler" onclick="history.back();" class="btn btn-outline-primary"/>
                 </td>
             </tr>
         </table>

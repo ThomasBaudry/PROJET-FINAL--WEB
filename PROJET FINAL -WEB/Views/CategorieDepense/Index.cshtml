@@ -13,13 +13,13 @@ else
     <h3>Liste des catégorie(s) de dépense(s) (@ViewBag.ListeCategorieDepenses.Length CategorieDepense(s)) :</h3>
     <br />
     <form asp-controller="" asp-action="" method="post">
-        <table>
+        <table class="table table-striped table-hover">
             <tr>
                 <th>Description</th>
                 <th>Pourcentage</th>
                 @if(ViewBag.ListeCategorieDepenses.Length > 0)
                 {
-                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/CategorieDepense/ViderListeCategorieDepense'; this.form.method='post'; submit();}" type="button" /></th>
+                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/CategorieDepense/ViderListeCategorieDepense'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-warning"/></th>
                 }
             </tr>
             @foreach (CategorieDepenseDTO categorieDepense in ViewBag.ListeCategorieDepenses)
@@ -27,8 +27,8 @@ else
                 <tr>
                     <td>@categorieDepense.Description</td>
                     <td>@categorieDepense.Pourcentage</td>
-                    <td><input value="Modifier" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description'; this.form.action='/CategorieDepense/FormulaireModifierCategorieDepense'; this.form.method='get'; submit();" type="button" /></td>
-                    <td><input value="Supprimer" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description';if(confirm('Voulez-vous vraiment supprimer la Catégorie de Dépense ?')==true){this.form.action='/CategorieDepense/SupprimerCategorieDepense'; this.form.method='post'; submit();}" type="button" /></td>
+                    <td><input value="Modifier" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description'; this.form.action='/CategorieDepense/FormulaireModifierCategorieDepense'; this.form.method='get'; submit();" type="button" class="btn btn-outline-success"/></td>
+                    <td><input value="Supprimer" onclick="document.getElementById('descriptionCategorieDepense').value ='@categorieDepense.Description';if(confirm('Voulez-vous vraiment supprimer la Catégorie de Dépense ?')==true){this.form.action='/CategorieDepense/SupprimerCategorieDepense'; this.form.method='post'; submit();}" type="button" class="btn btn-outline-danger"/></td>
                 </tr>
             }
         </table>
@@ -40,24 +40,24 @@ else
     <br />
     <form asp-controller="CategorieDepense" asp-action="AjouterCategorieDepense" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Description"></label>
+                    <label asp-for="Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Description" />
+                    <input asp-for="Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Pourcentage"></label>
+                    <label asp-for="Pourcentage" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="Pourcentage" />
+                    <input asp-for="Pourcentage" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Ajouter" />
+        <input type="submit" value="Ajouter" class="btn btn-outline-primary"/>
     </form>
     <br/>
 }

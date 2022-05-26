@@ -13,36 +13,63 @@ else
     <br />
     <form asp-controller="Depense" asp-action="ModifierDepense" method="post">
         <table>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="DateTemps"></label>
+                    <label asp-for="DateTemps"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="DateTemps" class="inputreadonly" readonly />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Montant"></label>
-                </td>
-                <td>
-                    <input asp-for="Montant" />
+                    <input asp-for="DateTemps" readonly  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="MontantAdmissible"></label>
+                    <label asp-for="Montant"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <input asp-for="MontantAdmissible" class="inputreadonly" readonly />
+                    <input asp-for="Montant"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Commerce"></label>
+                    <label asp-for="MontantAdmissible"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Commerce.Description">
+                    <input asp-for="MontantAdmissible" readonly  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </td>
+            </tr>
+            <tr class="input-group input-group-sm mb-3">
+                <td>
+                    <label asp-for="Commerce"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
+                </td>
+                <td>
+                    @if(ViewBag.ListeCommerces.Count <= 6)
+                    {
+                        <div class="form-check">
+                        @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
+                        {
+                            if (commerce.Description == ViewBag.DescCommerce)
+                            {
+                                <input class="form-check-input" type="radio" asp-for="Commerce.Description" value="@commerce.Description" checked>
+                                <label class="form-check-label" asp-for="Commerce.Description">
+                                @commerce.Description
+                                </label>
+                                <br>
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="radio" asp-for="Commerce.Description" value="@commerce.Description">
+                                <label class="form-check-label" asp-for="Commerce.Description">
+                                @commerce.Description
+                                </label>
+                                <br>
+                            }
+                    
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <select asp-for="Commerce.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (CommerceDTO commerce in ViewBag.ListeCommerces)
                         {
                             if (commerce.Description == ViewBag.DescCommerce)
@@ -53,15 +80,43 @@ else
                             {
                                 <option>@commerce.Description</option>}
                             }
-                    </select>
+                        </select>
+                    }
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <label asp-for="Categorie"></label>
+                    <label asp-for="Categorie"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                 </td>
                 <td>
-                    <select asp-for="Categorie.Description">
+                    @if(ViewBag.ListeCategorieDepense.Count <= 6)
+                    {
+                        <div class="form-check">
+                        @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
+                        {
+                            if (categorie.Description == ViewBag.DescCategorieDepense)
+                            {
+                                <input class="form-check-input" type="radio" asp-for="Categorie.Description" value="@categorie.Description" checked>
+                                <label class="form-check-label" asp-for="Categorie.Description">
+                                @categorie.Description
+                                </label>
+                                <br>
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="radio" asp-for="Categorie.Description" value="@categorie.Description">
+                                <label class="form-check-label" asp-for="Categorie.Description">
+                                @categorie.Description
+                                </label>
+                                <br>
+                            }
+                    
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <select asp-for="Categorie.Description" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (CategorieDepenseDTO categorie in ViewBag.ListeCategorieDepense)
                         {
                             if (categorie.Description == ViewBag.DescCategorieDepense)
@@ -73,14 +128,15 @@ else
                                 <option>@categorie.Description</option>}
                             }
                     </select>
+                    }
                 </td>
             </tr>
-            <tr>
+            <tr class="input-group input-group-sm mb-3">
                 <td>
-                    <input type="submit" value="Modifier" onclick="document.getElementById('nomGarderie').value ='@ViewBag.nomGarderie';"/>
+                    <input type="submit" value="Modifier" onclick="document.getElementById('nomGarderie').value ='@ViewBag.nomGarderie';" class="btn btn-outline-success"/>
                 </td>
                 <td>
-                    <input type="button" value="Annuler" onclick="history.back();" />
+                    <input type="button" value="Annuler" onclick="history.back();" class="btn btn-outline-primary"/>
                 </td>
             </tr>
         </table>

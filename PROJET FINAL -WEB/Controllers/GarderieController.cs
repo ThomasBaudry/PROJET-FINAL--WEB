@@ -157,5 +157,33 @@ namespace PROJET_FINAL__WEB.Controllers
 
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Action FormulaireFinance.
+        /// Permet d'afficher le formulaire pour la finance d'une Garderie.
+        /// </summary>
+        /// <param name="nomGarderie">Nom de la Garderie.</param>
+        /// <returns>IActionResult</returns>
+        [Route("/Garderie/FormulaireFinance")]
+        [HttpGet]
+        public async Task<IActionResult> FormulaireFinance([FromQuery] string nomGarderie)
+        {
+            try
+            {
+                if (TempData["MessageErreur"] != null)
+                    ViewBag.MessageErreur = TempData["MessageErreur"];
+                JsonValue jsonResponseRevenu = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Finance/ObtenirRevenu?nomGarderie=" + nomGarderie);
+                JsonValue jsonResponseDepenses = await WebAPI.Instance.ExecuteGetAsync("http://" + Program.HOST + ":" + Program.PORT + "/Finance/ObtenirDepenses?nomGarderie=" + nomGarderie);
+                FinanceDTO finance = new FinanceDTO(JsonConvert.DeserializeObject<double>(jsonResponseRevenu.ToString()), JsonConvert.DeserializeObject<double>(jsonResponseDepenses.ToString()));
+                ViewBag.NomGarderie = nomGarderie;
+                ViewBag.Finance = finance;
+                return View(finance);
+            }
+            catch (Exception e)
+            {
+                TempData["MessageErreur"] = "Impossible d'ouvrir le formulaire de finance. " + e.Message;
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -11,7 +11,7 @@ else
 { @*Affichage de la liste des Garderies et des Présences des enfants et des éducateurs...*@
 <h3>Sélectionner une Garderie :</h3>
                 <form asp-controller="Presence" asp-action="Index" method="get">
-                    <select name="nomGarderie" onchange="submit();">
+                    <select name="nomGarderie" onchange="submit();" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         @foreach (GarderieDTO garderie in ViewBag.ListeGarderies)
                         {
                             if (garderie.Nom == ViewBag.NomGarderie)
@@ -22,22 +22,18 @@ else
                             {
                                 <option>@garderie.Nom</option>}
                             }
-                    </select>
+                     </select>
                 </form>
                 <br>
                 <h3>Liste des Présence(s) (@ViewBag.ListePresences.Length Présence(s)) :</h3>
                 <br>
                 <form asp-controller="" asp-action="" method="post">
-                    <table>
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th>Date</th>
                                 <th>Enfant</th>
                                 <th>Educateur</th>
-                                @if (ViewBag.ListePresences.Length > 0)
-                                {
-                                    <th><input value="Vider la Liste" onclick="if(confirm('Voulez-vous vraiment vider la liste?')==true){this.form.action='/Presence/ViderListePresence'; this.form.method='post'; submit();}" type="button" /></th>
-                                }
                             </tr>
                             @foreach (PresenceDTO presence in ViewBag.ListePresences)
                             {
@@ -45,8 +41,6 @@ else
                                     <td>@presence.DateTemps</td>
                                     <td>@presence.Enfant.Nom @presence.Enfant.Prenom</td>
                                     <td>@presence.Educateur.Nom @presence.Educateur.Prenom</td>
-                                    <td><input value="Modifier" onclick="document.getElementById('date').value ='@presence.DateTemps'; this.form.action='/Presence/FormulaireModifierPresence'; this.form.method='get'; submit();" type="button"></td>
-                                    <td><input value="Supprimer" onclick="document.getElementById('date').value ='@presence.DateTemps'; myFunction(); this.form.action='/Presence/SupprimerPresence'; this.form.method='post'; submit();" type="button"></td>
                                 </tr>
                              }
                             <input id="nomGarderie" name="nomGarderie" type="hidden" value="@ViewBag.NomGarderie">
@@ -67,20 +61,47 @@ else
                     <input type="hidden" name="nomGarderie" value="@ViewBag.NomGarderie">
                     <table>
                         <tbody>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="DateTemps"></label>
+                                    <label asp-for="DateTemps" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <input type="date" asp-for="DateTemps" value="@DateTime.Today">
+                                    <input type="date" asp-for="DateTemps" value="@DateTime.Today" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="Enfant"></label>
+                                    <label asp-for="Enfant" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select name="enfantInfo">
+                                    @if(ViewBag.ListeEnfants.Length <= 6)
+                                    {
+                                        <div class="form-check">
+                                        @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
+                                        {
+                                            if (enfant.Nom == ViewBag.Enfant.Nom && enfant.Prenom == ViewBag.Enfant.Prenom && enfant.DateDeNaissance == ViewBag.Enfant.DateDeNaissance)
+                                            {
+                                                <input class="form-check-input" type="radio" name="enfantInfo" value="@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance" checked>
+                                                <label class="form-check-label" name="enfantInfo">
+                                                @enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance
+                                                </label>
+                                                <br>
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="enfantInfo" value="@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance">
+                                                <label class="form-check-label" name="enfantInfo">
+                                                @enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance
+                                                </label>
+                                                <br>
+                                            }
+                    
+                                        }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <select name="enfantInfo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (EnfantDTO enfant in ViewBag.ListeEnfants)
                                         {
                                             if (enfant.Nom == ViewBag.Enfant.Nom && enfant.Prenom == ViewBag.Enfant.Prenom && enfant.DateDeNaissance == ViewBag.Enfant.DateDeNaissance)
@@ -92,15 +113,43 @@ else
                                                 <option>@enfant.Nom;@enfant.Prenom;@enfant.DateDeNaissance</option>
 }
                                         }
-                                    </select>
+                                        </select>
+                                    }
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="input-group input-group-sm mb-3">
                                 <td>
-                                    <label asp-for="Educateur"></label>
+                                    <label asp-for="Educateur" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></label>
                                 </td>
                                 <td>
-                                    <select name="educateurInfo">
+                                    @if(ViewBag.ListeEducateurs.Length <= 6)
+                                    {
+                                        <div class="form-check">
+                                        @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
+                                        {
+                                            if (educateur.Nom == ViewBag.Educateur.Nom && educateur.Prenom == ViewBag.Educateur.Prenom && educateur.DateDeNaissance == ViewBag.Educateur.DateDeNaissance)
+                                            {
+                                                <input class="form-check-input" type="radio" name="educateurInfo" value="@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance" checked>
+                                                <label class="form-check-label" name="educateurInfo">
+                                                @educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance
+                                                </label>
+                                                <br>
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="educateurInfo" value="@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance">
+                                                <label class="form-check-label" name="educateurInfo">
+                                                @educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance
+                                                </label>
+                                                <br>
+                                            }
+                    
+                                        }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <select name="educateurInfo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                                         @foreach (EducateurDTO educateur in ViewBag.ListeEducateurs)
                                         {
                                             if (educateur.Nom == ViewBag.Educateur.Nom && educateur.Prenom == ViewBag.Educateur.Prenom && educateur.DateDeNaissance == ViewBag.Educateur.DateDeNaissance)
@@ -112,12 +161,13 @@ else
                                                 <option>@educateur.Nom;@educateur.Prenom;@educateur.DateDeNaissance</option>
 }
                                         }
-                                    </select>
+                                        </select>
+                                    }
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Ajouter">
+                    <input type="submit" value="Ajouter" class="btn btn-outline-primary">
                 </form>
                 <br>
 }
